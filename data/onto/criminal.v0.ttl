@@ -1,0 +1,179 @@
+@prefix schema: <http://schema.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix criminal: <https://growgraph.dev/criminal#> .
+
+# Classes
+criminal:Person rdf:type rdfs:Class ;
+    rdfs:label "Person" ;
+    rdfs:comment "An individual involved in criminal proceedings, such as a suspect, victim, or witness." ;
+    rdfs:subClassOf schema:Person .
+
+criminal:Event rdf:type rdfs:Class ;
+    rdfs:label "Event" ;
+    rdfs:comment "An event related to a criminal case, such as a crime or court proceeding." ;
+    rdfs:subClassOf schema:Event .
+
+criminal:Fact rdf:type rdfs:Class ;
+    rdfs:label "Fact" ;
+    rdfs:comment "A fact established in a criminal case." .
+
+criminal:Organization rdf:type rdfs:Class ;
+    rdfs:label "Organization" ;
+    rdfs:comment "An organization involved in the criminal case, such as a court or law enforcement agency." ;
+    rdfs:subClassOf schema:Organization .
+
+criminal:Role rdf:type rdfs:Class ;
+    rdfs:label "Role" ;
+    rdfs:comment "A role in a criminal case, such as victim, suspect, or witness." .
+
+criminal:Action rdf:type rdfs:Class ;
+    rdfs:label "Action" ;
+    rdfs:comment "An action related to the criminal event." ;
+    rdfs:subClassOf schema:Action .
+
+criminal:Sanction rdf:type rdfs:Class ;
+    rdfs:label "Sanction" ;
+    rdfs:comment "A sanction imposed as a result of a criminal event." ;
+    rdfs:subClassOf schema:Penalty .
+
+# Properties
+criminal:conviction rdf:type rdf:Property ;
+    rdfs:label "conviction" ;
+    rdfs:domain criminal:Person ;
+    rdfs:range schema:CreativeWork ;
+    rdfs:comment "A conviction related to a person." .
+
+criminal:sendsAgainst rdf:type rdf:Property ;
+    rdfs:label "sends against" ;
+    rdfs:domain criminal:Event ;
+    rdfs:range criminal:Organization ;
+    rdfs:comment "An organization sending against a specific event." .
+
+criminal:containsSanction rdf:type rdf:Property ;
+    rdfs:label "contains sanction" ;
+    rdfs:domain criminal:Event ;
+    rdfs:range criminal:Sanction ;
+    rdfs:comment "An event containing a sanction." .
+
+criminal:concerns rdf:type rdf:Property ;
+    rdfs:label "concerns" ;
+    rdfs:domain criminal:Event ;
+    rdfs:range criminal:Event ;
+    rdfs:comment "An event that concerns another event." .
+
+schema:participant rdf:type rdf:Property ;
+    rdfs:label "has participant" ;
+    rdfs:domain criminal:Event ;
+    rdfs:range criminal:Person ;
+    rdfs:comment "A participant in a criminal event." .
+
+criminal:commits rdf:type rdf:Property ;
+    rdfs:label "commits" ;
+    rdfs:domain criminal:Person ;
+    rdfs:range criminal:Event ;
+    rdfs:comment "A person committing an event." .
+
+schema:subClassOf rdf:type rdf:Property ;
+    rdfs:label "subclass of" ;
+    rdfs:domain criminal:Event ;
+    rdfs:range criminal:Class ;
+    rdfs:comment "An event that is a subclass of another class." .
+
+schema:age rdf:type rdf:Property ;
+    rdfs:label "has age" ;
+    rdfs:domain criminal:Person ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "Age of a person." .
+
+schema:address rdf:type rdf:Property ;
+    rdfs:label "resides at" ;
+    rdfs:domain criminal:Person ;
+    rdfs:range schema:Place ;
+    rdfs:comment "Residence of a person." .
+
+schema:children rdf:type rdf:Property ;
+    rdfs:label "has children" ;
+    rdfs:domain criminal:Person ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "Number of children a person has." .
+
+criminal:hasProfession rdf:type rdf:Property ;
+    rdfs:label "has profession" ;
+    rdfs:domain criminal:Person ;
+    rdfs:range schema:Occupation ;
+    rdfs:comment "Profession of a person." .
+
+criminal:hasMaritalStatus rdf:type rdf:Property ;
+    rdfs:label "has marital status" ;
+    rdfs:domain criminal:Person ;
+    rdfs:range schema:MaritalStatus ;
+    rdfs:comment "Marital status of a person." .
+
+schema:location rdf:type rdf:Property ;
+    rdfs:label "is located" ;
+    rdfs:domain criminal:Organization ;
+    rdfs:range schema:Place ;
+    rdfs:comment "Location of an organization." .
+
+criminal:hasResource rdf:type rdf:Property ;
+    rdfs:label "has resource" ;
+    rdfs:domain criminal:Person ;
+    rdfs:range schema:Intangible ;
+    rdfs:comment "A resource available to a person." .
+
+schema:startDate rdf:type rdf:Property ;
+    rdfs:label "takes place on" ;
+    rdfs:domain criminal:Event ;
+    rdfs:range xsd:date ;
+    rdfs:comment "The date on which an event takes place." .
+
+criminal:initiates rdf:type rdf:Property ;
+    rdfs:label "initiates" ;
+    rdfs:domain criminal:Person ;
+    rdfs:range criminal:Event ;
+    rdfs:comment "A person initiating an event." .
+
+criminal:prosecutes rdf:type rdf:Property ;
+    rdfs:label "prosecutes" ;
+    rdfs:domain criminal:Event ;
+    rdfs:range criminal:Person ;
+    rdfs:comment "A person being prosecuted in relation to an event." .
+
+foaf:knows rdf:type rdf:Property ;
+    rdfs:label "knows" ;
+    rdfs:domain criminal:Person ;
+    rdfs:range criminal:Person ;
+    rdfs:comment "A person known by another person." .
+
+criminal:issues rdf:type rdf:Property ;
+    rdfs:label "issues" ;
+    rdfs:domain criminal:Organization ;
+    rdfs:range criminal:Event ;
+    rdfs:comment "An organization issuing an event." .
+
+criminal:hasRole rdf:type rdf:Property ;
+    rdfs:label "has role" ;
+    rdfs:domain criminal:Person ;
+    rdfs:range criminal:Role ;
+    rdfs:comment "The role of a person in a criminal case." .
+
+criminal:isVictim rdf:type rdf:Property ;
+    rdfs:label "is victim" ;
+    rdfs:domain criminal:Role ;
+    rdfs:range criminal:Person ;
+    rdfs:comment "A person who is the victim in a criminal event." .
+
+criminal:isSuspect rdf:type rdf:Property ;
+    rdfs:label "is suspect" ;
+    rdfs:domain criminal:Role ;
+    rdfs:range criminal:Person ;
+    rdfs:comment "A person who is a suspect in a criminal event." .
+
+criminal:isConvict rdf:type rdf:Property ;
+    rdfs:label "is convict" ;
+    rdfs:domain criminal:Role ;
+    rdfs:range criminal:Person ;
+    rdfs:comment "A person who is convicted in a criminal event." .

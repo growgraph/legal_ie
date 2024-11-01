@@ -1,0 +1,62 @@
+fail_fast: false
+
+repos:
+-   repo: https://github.com/syntaqx/git-hooks
+    rev: v0.0.18
+    hooks:
+    -   id: circleci-config-validate
+#    -   id: forbid-binary
+    -   id: go-fmt
+    -   id: go-test
+    -   id: go-mod-tidy
+    -   id: shfmt
+        args:
+        -   "-w"
+-   repo: https://github.com/pecigonzalo/pre-commit-shfmt
+    rev: v2.2.0
+    hooks:
+    -   id: shell-fmt
+        args:
+        -   -i
+        -   "2"
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.1
+    hooks:
+    -   id: ruff
+        args: [--fix, --ignore, E722]
+    -   id: ruff-format
+-   repo: local
+    hooks:
+    -   id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        args: ["-rn", "-sn", "--output-format=colorized", "--errors-only", "--jobs", "4", "--rcfile=.pylintrc"]
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.13.0
+    hooks:
+    -   id: mypy
+        args: [--show-error-codes]
+        additional_dependencies: [types-requests, types-python-dateutil, types-waitress, types-PyYAML, pandas-stubs]
+-   repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.14.0
+    hooks:
+    -   id: pretty-format-yaml
+        args: [--autofix, --indent, '4', --preserve-quotes]
+        files: ^(?!.*docker-compose.yml)$
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+    -   id: pretty-format-json
+        args: [--autofix, --indent, '4', --no-sort-keys]
+-   repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.14.0
+    hooks:
+    -   id: pretty-format-toml
+        args: [--autofix]
+-   repo: https://github.com/pappasam/toml-sort
+    rev: v0.23.1
+    hooks:
+    -   id: toml-sort
+        args: [-ia]

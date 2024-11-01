@@ -1,0 +1,177 @@
+@prefix schema: <https://schema.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix criminal: <https://growgraph.dev/criminal#> .
+
+# Classes
+schema:Event a rdfs:Class .
+schema:Person a rdfs:Class .
+schema:Organization a rdfs:Class .
+criminal:Conviction a rdfs:Class ;
+    rdfs:label "Conviction" ;
+    rdfs:comment "Legal decision regarding guilt of an accused individual." .
+
+criminal:Offence a rdfs:Class ;
+    rdfs:label "Offence" ;
+    rdfs:comment "An act or omission which constitutes a criminal wrongdoing." ;
+    rdfs:subClassOf schema:Event .
+
+criminal:Fact a rdfs:Class ;
+    rdfs:label "Fact" ;
+    rdfs:comment "A fact related to an event or offence in criminal cases." .
+
+criminal:Punishment a rdfs:Class ;
+    rdfs:label "Punishment" ;
+    rdfs:comment "Consequence imposed on a person as a result of a conviction." .
+
+criminal:Fine a rdfs:Class ;
+    rdfs:label "Fine" ;
+    rdfs:comment "Monetary penalty imposed as punishment." ;
+    rdfs:subClassOf criminal:Punishment .
+
+criminal:Imprisonment a rdfs:Class ;
+    rdfs:label "Imprisonment" ;
+    rdfs:comment "Sentence requiring confinement in prison." ;
+    rdfs:subClassOf criminal:Punishment .
+
+criminal:Restriction a rdfs:Class ;
+    rdfs:label "Restriction" ;
+    rdfs:comment "Limitation imposed on a person's freedom as punishment." ;
+    rdfs:subClassOf criminal:Punishment .
+
+criminal:Victim a rdfs:Class ;
+    rdfs:label "Victim" ;
+    rdfs:comment "The individual or entity harmed by a criminal act." ;
+    rdfs:subClassOf schema:Person .
+
+criminal:Suspect a rdfs:Class ;
+    rdfs:label "Suspect" ;
+    rdfs:comment "Individual believed to have committed an offence." ;
+    rdfs:subClassOf schema:Person .
+
+criminal:Convict a rdfs:Class ;
+    rdfs:label "Convict" ;
+    rdfs:comment "Individual found guilty of an offence." ;
+    rdfs:subClassOf schema:Person .
+
+# Properties
+
+criminal:issues a rdf:Property ;
+    rdfs:label "issues" ;
+    rdfs:comment "Indicates that an organization issues or triggers an event." ;
+    rdfs:domain schema:Organization ;
+    rdfs:range schema:Event .
+
+criminal:takesPlaceOn a rdf:Property ;
+    rdfs:label "takesPlaceOn" ;
+    rdfs:comment "Specifies the date on which an event occurs." ;
+    rdfs:domain schema:Event ;
+    rdfs:range schema:Date .
+
+criminal:contains a rdf:Property ;
+    rdfs:label "contains" ;
+    rdfs:comment "Denotes events or facts involved in an offence or related event." ;
+    rdfs:domain schema:Event ;
+    rdfs:range schema:Event .
+
+criminal:hasParticipant a rdf:Property ;
+    rdfs:label "hasParticipant" ;
+    rdfs:comment "Defines a participant in a crime-related event or offence." ;
+    rdfs:domain schema:Event ;
+    rdfs:range criminal:Victim .
+
+criminal:hasConviction a rdf:Property ;
+    rdfs:label "hasConviction" ;
+    rdfs:domain schema:Person ;
+    rdfs:range criminal:Conviction ;
+    rdfs:comment "Indicates a person’s conviction." .
+
+criminal:hasPunishment a rdf:Property ;
+    rdfs:label "hasPunishment" ;
+    rdfs:domain criminal:Conviction ;
+    rdfs:range criminal:Punishment ;
+    rdfs:comment "Indicates a punishment related to a conviction." .
+
+criminal:hasDuration a rdf:Property ;
+    rdfs:label "hasDuration" ;
+    rdfs:domain criminal:Punishment ;
+    rdfs:range schema:Duration ;
+    rdfs:comment "Specifies the duration of a punishment." .
+
+criminal:isAssociatedWith a rdf:Property ;
+    rdfs:label "isAssociatedWith" ;
+    rdfs:domain criminal:Conviction ;
+    rdfs:range criminal:Offence ;
+    rdfs:comment "Associates a conviction with an offence." .
+
+criminal:concerns a rdf:Property ;
+    rdfs:label "concerns" ;
+    rdfs:comment "Describes the involvement of an event in another event or issue." ;
+    rdfs:domain schema:Event ;
+    rdfs:range schema:Event .
+
+criminal:hasFact a rdf:Property ;
+    rdfs:label "hasFact" ;
+    rdfs:comment "Indicates a fact associated with an event." ;
+    rdfs:domain schema:Event ;
+    rdfs:range criminal:Fact .
+
+criminal:prosecutes a rdf:Property ;
+    rdfs:label "prosecutes" ;
+    rdfs:comment "Indicates that a person is prosecuting an event." ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Event .
+
+criminal:initiates a rdf:Property ;
+    rdfs:label "initiates" ;
+    rdfs:comment "Describes the initiation of an event by a person." ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Event .
+
+criminal:residesAt a rdf:Property ;
+    rdfs:label "residesAt" ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Place ;
+    rdfs:comment "Indicates the residence of a person." .
+
+criminal:hasProfession a rdf:Property ;
+    rdfs:label "hasProfession" ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Occupation ;
+    rdfs:comment "Indicates the profession of a person." .
+
+criminal:hasMaritalStatus a rdf:Property ;
+    rdfs:label "hasMaritalStatus" ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:MaritalStatus ;
+    rdfs:comment "Indicates the marital status of a person." .
+
+criminal:knows a rdf:Property ;
+    rdfs:label "knows" ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Person ;
+    rdfs:comment "Indicates acquaintance or relation between two persons." .
+
+criminal:hasChildren a rdf:Property ;
+    rdfs:label "hasChildren" ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Number ;
+    rdfs:comment "Specifies the number of children a person has." .
+
+criminal:hasResource a rdf:Property ;
+    rdfs:label "hasResource" ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Resource ;
+    rdfs:comment "Indicates a resource associated with a person." .
+
+
+
+# Roles and their Subclasses
+criminal:Role a rdfs:Class ;
+    rdfs:label "Role" ;
+    rdfs:comment "A functional or social role associated with a person or participant." .
+
+criminal:Victim rdfs:subClassOf criminal:Role .
+criminal:Suspect rdfs:subClassOf criminal:Role .
+criminal:Convict rdfs:subClassOf criminal:Role .

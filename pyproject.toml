@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "legal_ie"
+version = "0.1.0"
+description = ""
+authors = ["Alexander Belikov <abelikov@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.3"
+click = "^8.1.7"
+rdflib = "^7.1.1"
+suthing = {git = "ssh://git@github.com/growgraph/suthing.git", rev = "v0.2.10"}
+langchain-openai = "^0.2.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+[tool.poetry.group.dev.dependencies]
+matplotlib = "^3.9.1"
+pre-commit = "^3.3.3"
+pygraphviz = "^1.13"
+pylint = "^3.2.6"
+pytest = "^8.3.3"
+pydotplus = "^2.0.2"
+jupyter = "^1.1.1"

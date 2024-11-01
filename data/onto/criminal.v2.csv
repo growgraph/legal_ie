@@ -1,0 +1,137 @@
+subject,predicate,object
+criminal:Fact,rdfs:comment,<A fact related to an event or offence in criminal cases.>
+criminal:Role,rdfs:comment,<A functional or social role associated with a person or participant.>
+criminal:Offence,rdfs:comment,<An act or omission which constitutes a criminal wrongdoing.>
+criminal:isAssociatedWith,rdfs:comment,<Associates a conviction with an offence.>
+criminal:Punishment,rdfs:comment,<Consequence imposed on a person as a result of a conviction.>
+criminal:Convict,rdfs:label,<Convict>
+criminal:Conviction,rdfs:label,<Conviction>
+criminal:hasParticipant,rdfs:comment,<Defines a participant in a crime-related event or offence.>
+criminal:contains,rdfs:comment,<Denotes events or facts involved in an offence or related event.>
+criminal:initiates,rdfs:comment,<Describes the initiation of an event by a person.>
+criminal:concerns,rdfs:comment,<Describes the involvement of an event in another event or issue.>
+criminal:Fact,rdfs:label,<Fact>
+criminal:Fine,rdfs:label,<Fine>
+criminal:Imprisonment,rdfs:label,<Imprisonment>
+criminal:hasFact,rdfs:comment,<Indicates a fact associated with an event.>
+criminal:hasConviction,rdfs:comment,<Indicates a person’s conviction.>
+criminal:hasPunishment,rdfs:comment,<Indicates a punishment related to a conviction.>
+criminal:hasResource,rdfs:comment,<Indicates a resource associated with a person.>
+criminal:knows,rdfs:comment,<Indicates acquaintance or relation between two persons.>
+criminal:prosecutes,rdfs:comment,<Indicates that a person is prosecuting an event.>
+criminal:issues,rdfs:comment,<Indicates that an organization issues or triggers an event.>
+criminal:hasMaritalStatus,rdfs:comment,<Indicates the marital status of a person.>
+criminal:hasProfession,rdfs:comment,<Indicates the profession of a person.>
+criminal:residesAt,rdfs:comment,<Indicates the residence of a person.>
+criminal:Suspect,rdfs:comment,<Individual believed to have committed an offence.>
+criminal:Convict,rdfs:comment,<Individual found guilty of an offence.>
+criminal:Conviction,rdfs:comment,<Legal decision regarding guilt of an accused individual.>
+criminal:Restriction,rdfs:comment,<Limitation imposed on a person's freedom as punishment.>
+criminal:Fine,rdfs:comment,<Monetary penalty imposed as punishment.>
+criminal:Offence,rdfs:label,<Offence>
+criminal:Punishment,rdfs:label,<Punishment>
+criminal:Restriction,rdfs:label,<Restriction>
+criminal:Role,rdfs:label,<Role>
+criminal:Imprisonment,rdfs:comment,<Sentence requiring confinement in prison.>
+criminal:takesPlaceOn,rdfs:comment,<Specifies the date on which an event occurs.>
+criminal:hasDuration,rdfs:comment,<Specifies the duration of a punishment.>
+criminal:hasChildren,rdfs:comment,<Specifies the number of children a person has.>
+criminal:Suspect,rdfs:label,<Suspect>
+criminal:Victim,rdfs:comment,<The individual or entity harmed by a criminal act.>
+criminal:Victim,rdfs:label,<Victim>
+criminal:concerns,rdfs:label,<concerns>
+criminal:contains,rdfs:label,<contains>
+criminal:hasChildren,rdfs:label,<hasChildren>
+criminal:hasConviction,rdfs:label,<hasConviction>
+criminal:hasDuration,rdfs:label,<hasDuration>
+criminal:hasFact,rdfs:label,<hasFact>
+criminal:hasMaritalStatus,rdfs:label,<hasMaritalStatus>
+criminal:hasParticipant,rdfs:label,<hasParticipant>
+criminal:hasProfession,rdfs:label,<hasProfession>
+criminal:hasPunishment,rdfs:label,<hasPunishment>
+criminal:hasResource,rdfs:label,<hasResource>
+criminal:initiates,rdfs:label,<initiates>
+criminal:isAssociatedWith,rdfs:label,<isAssociatedWith>
+criminal:issues,rdfs:label,<issues>
+criminal:knows,rdfs:label,<knows>
+criminal:prosecutes,rdfs:label,<prosecutes>
+criminal:residesAt,rdfs:label,<residesAt>
+criminal:takesPlaceOn,rdfs:label,<takesPlaceOn>
+criminal:hasConviction,rdfs:range,criminal:Conviction
+criminal:hasPunishment,rdfs:domain,criminal:Conviction
+criminal:isAssociatedWith,rdfs:domain,criminal:Conviction
+criminal:hasFact,rdfs:range,criminal:Fact
+criminal:isAssociatedWith,rdfs:range,criminal:Offence
+criminal:Fine,rdfs:subClassOf,criminal:Punishment
+criminal:Imprisonment,rdfs:subClassOf,criminal:Punishment
+criminal:Restriction,rdfs:subClassOf,criminal:Punishment
+criminal:hasDuration,rdfs:domain,criminal:Punishment
+criminal:hasPunishment,rdfs:range,criminal:Punishment
+criminal:Convict,rdfs:subClassOf,criminal:Role
+criminal:Suspect,rdfs:subClassOf,criminal:Role
+criminal:Victim,rdfs:subClassOf,criminal:Role
+criminal:hasParticipant,rdfs:range,criminal:Victim
+criminal:concerns,rdf:type,rdf:Property
+criminal:contains,rdf:type,rdf:Property
+criminal:hasChildren,rdf:type,rdf:Property
+criminal:hasConviction,rdf:type,rdf:Property
+criminal:hasDuration,rdf:type,rdf:Property
+criminal:hasFact,rdf:type,rdf:Property
+criminal:hasMaritalStatus,rdf:type,rdf:Property
+criminal:hasParticipant,rdf:type,rdf:Property
+criminal:hasProfession,rdf:type,rdf:Property
+criminal:hasPunishment,rdf:type,rdf:Property
+criminal:hasResource,rdf:type,rdf:Property
+criminal:initiates,rdf:type,rdf:Property
+criminal:isAssociatedWith,rdf:type,rdf:Property
+criminal:issues,rdf:type,rdf:Property
+criminal:knows,rdf:type,rdf:Property
+criminal:prosecutes,rdf:type,rdf:Property
+criminal:residesAt,rdf:type,rdf:Property
+criminal:takesPlaceOn,rdf:type,rdf:Property
+criminal:Convict,rdf:type,rdfs:Class
+criminal:Conviction,rdf:type,rdfs:Class
+criminal:Fact,rdf:type,rdfs:Class
+criminal:Fine,rdf:type,rdfs:Class
+criminal:Imprisonment,rdf:type,rdfs:Class
+criminal:Offence,rdf:type,rdfs:Class
+criminal:Punishment,rdf:type,rdfs:Class
+criminal:Restriction,rdf:type,rdfs:Class
+criminal:Role,rdf:type,rdfs:Class
+criminal:Suspect,rdf:type,rdfs:Class
+criminal:Victim,rdf:type,rdfs:Class
+schema:Event,rdf:type,rdfs:Class
+schema:Organization,rdf:type,rdfs:Class
+schema:Person,rdf:type,rdfs:Class
+criminal:takesPlaceOn,rdfs:range,schema:Date
+criminal:hasDuration,rdfs:range,schema:Duration
+criminal:Offence,rdfs:subClassOf,schema:Event
+criminal:concerns,rdfs:domain,schema:Event
+criminal:concerns,rdfs:range,schema:Event
+criminal:contains,rdfs:domain,schema:Event
+criminal:contains,rdfs:range,schema:Event
+criminal:hasFact,rdfs:domain,schema:Event
+criminal:hasParticipant,rdfs:domain,schema:Event
+criminal:initiates,rdfs:range,schema:Event
+criminal:issues,rdfs:range,schema:Event
+criminal:prosecutes,rdfs:range,schema:Event
+criminal:takesPlaceOn,rdfs:domain,schema:Event
+criminal:hasMaritalStatus,rdfs:range,schema:MaritalStatus
+criminal:hasChildren,rdfs:range,schema:Number
+criminal:hasProfession,rdfs:range,schema:Occupation
+criminal:issues,rdfs:domain,schema:Organization
+criminal:Convict,rdfs:subClassOf,schema:Person
+criminal:Suspect,rdfs:subClassOf,schema:Person
+criminal:Victim,rdfs:subClassOf,schema:Person
+criminal:hasChildren,rdfs:domain,schema:Person
+criminal:hasConviction,rdfs:domain,schema:Person
+criminal:hasMaritalStatus,rdfs:domain,schema:Person
+criminal:hasProfession,rdfs:domain,schema:Person
+criminal:hasResource,rdfs:domain,schema:Person
+criminal:initiates,rdfs:domain,schema:Person
+criminal:knows,rdfs:domain,schema:Person
+criminal:knows,rdfs:range,schema:Person
+criminal:prosecutes,rdfs:domain,schema:Person
+criminal:residesAt,rdfs:domain,schema:Person
+criminal:residesAt,rdfs:range,schema:Place
+criminal:hasResource,rdfs:range,schema:Resource
