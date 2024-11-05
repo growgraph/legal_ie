@@ -18,6 +18,8 @@ logger = logging.getLogger(__name__)
 @click.option("--onto-path", type=click.Path(path_type=pathlib.Path), required=True)
 @click.option("--env-path", type=click.Path(path_type=pathlib.Path), required=True)
 def main(input_path, onto_path, env_path):
+    input_path = input_path.as_posix()
+
     _ = load_dotenv(dotenv_path=env_path.expanduser())
 
     llm = ChatOpenAI(model="gpt-4o-mini")
@@ -35,6 +37,11 @@ def main(input_path, onto_path, env_path):
 
     print(extracted_text)
 
+    ttl_tent_fname = ".".join(input_path.split(".")[:-1] + ["tentative", "ttl"])
+
+    with open(ttl_tent_fname, "w") as f:
+        f.write(extracted_text)
+
     g = rdflib.Graph()
     _ = g.parse(data=extracted_text, format="turtle")
 
@@ -43,10 +50,12 @@ def main(input_path, onto_path, env_path):
     g.namespace_manager.bind(current_ns, specific_ns, replace=True)
     g.serialize(destination=".".join(input_path.split(".")[:-1] + ["ttl"]))
     triples = [[g.namespace_manager.normalizeUri(t) for t in tri] for tri in g]
-    df = pd.DataFrame(triples, columns=["subject", "predicate", "object"]).sort_values(["object", "subject", "predicate"])
+    df = pd.DataFrame(triples, columns=["subject", "predicate", "object"]).sort_values(
+        ["object", "subject", "predicate"]
+    )
 
     csv_fname = ".".join(input_path.split(".")[:-1] + ["csv"])
-    df.to_csv(csv_fname)
+    df.to_csv(csv_fname, index=False)
 
 
 if __name__ == "__main__":
