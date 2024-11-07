@@ -8,6 +8,9 @@ from langchain_core.prompts import PromptTemplate
 # from IPython.display import display
 from rdflib.tools.rdf2dot import rdf2dot
 
+import networkx as nx
+import matplotlib.pyplot as plt
+
 
 def extract_struct(text, key):
     # Pattern to match text between ```key and ```
@@ -22,6 +25,36 @@ def visualize(g, path):
     rdf2dot(g, stream)
     dg = pydotplus.graph_from_dot_data(stream.getvalue())
     dg.write_png(path)
+
+
+def visualize_nx(df, fname):
+    edges_labeled = [
+        (*item[["subject", "object"]], {"relation": item["predicate"]})
+        for _, item in df.iterrows()
+    ]
+    G = nx.DiGraph()
+    G.add_edges_from(edges_labeled)
+
+    _ = plt.figure(1, figsize=(30, 15), dpi=300)
+
+    pos = nx.nx_agraph.graphviz_layout(G)
+
+    # pos = nx.nx_agraph.graphviz_layout(G, prog="dot")
+    # Draw nodes
+    nx.draw(
+        G,
+        pos,
+        with_labels=True,
+        node_color="lightblue",
+        node_size=3000,
+        font_size=10,
+        font_weight="bold",
+    )
+
+    # Draw edge labels
+    edge_labels = nx.get_edge_attributes(G, "relation")
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
+    plt.savefig(fname, dpi=300)
 
 
 def render_response(onto_str: str, text: str, llm):
