@@ -54,7 +54,7 @@ def visualize_nx(df, fname):
     # Draw edge labels
     edge_labels = nx.get_edge_attributes(G, "relation")
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
-    plt.savefig(fname, dpi=300)
+    plt.savefig(fname, dpi=300, bbox_inches="tight")
 
 
 def render_response(onto_str: str, text: str, llm):
