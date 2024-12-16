@@ -3,7 +3,6 @@ import sys
 
 import pandas as pd
 import pathlib
-import suthing
 import click
 import rdflib
 from dotenv import load_dotenv

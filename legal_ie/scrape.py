@@ -90,6 +90,7 @@ def fetch_total_pages(base_url, driver, fetch_timeout=10):
         return total_pages
     return 0
 
+
 def download_pdfs(driver, decision_links, download_path):
     failed = []
     for link in tqdm(decision_links):
@@ -118,12 +119,21 @@ def init_ff_options(download_path):
         "browser.helperApps.neverAsk.saveToDisk", "application/pdf"
     )
     firefox_options.set_preference("browser.download.manager.closeWhenDone", True)
-    firefox_options.set_preference("browser.safebrowsing.downloads.enabled",
-                                   False)  # Disable safe browsing for downloads
-    firefox_options.set_preference("dom.popup_allowed_events", "change click dblclick mouseup")  # Allow pop-ups
-    firefox_options.set_preference("dom.disable_open_during_load", False)  # Allow opening during load
-    firefox_options.set_preference("browser.helperApps.alwaysAsk.force", False)  # No "open with" dialog
-    firefox_options.set_preference("security.dialog_enable_delay", 0)  # Disable dialog delays
+    firefox_options.set_preference(
+        "browser.safebrowsing.downloads.enabled", False
+    )  # Disable safe browsing for downloads
+    firefox_options.set_preference(
+        "dom.popup_allowed_events", "change click dblclick mouseup"
+    )  # Allow pop-ups
+    firefox_options.set_preference(
+        "dom.disable_open_during_load", False
+    )  # Allow opening during load
+    firefox_options.set_preference(
+        "browser.helperApps.alwaysAsk.force", False
+    )  # No "open with" dialog
+    firefox_options.set_preference(
+        "security.dialog_enable_delay", 0
+    )  # Disable dialog delays
     firefox_options.set_preference("security.warn_entering_secure", False)
     firefox_options.set_preference("security.warn_leaving_secure", False)
     firefox_options.set_preference("security.warn_viewing_mixed", False)
@@ -132,9 +142,7 @@ def init_ff_options(download_path):
 
 def process_date(date, data, base_url, download_path, geckodriver_path, head):
     date_str = date.date().isoformat()
-    logger.info(
-        f"Processing {date_str}"
-    )
+    logger.info(f"Processing {date_str}")
     data["date_du"] = date_str
     data["date_au"] = date_str
 
@@ -150,9 +158,7 @@ def process_date(date, data, base_url, download_path, geckodriver_path, head):
     full_url = f"{base_url}{query_string}"
     decision_links = fetch_decision_links(driver, full_url, head=head)
 
-    logger.info(
-        f"{date.date().isoformat()} : found {len(decision_links)} decisions"
-    )
+    logger.info(f"{date.date().isoformat()} : found {len(decision_links)} decisions")
 
     failed_ids = download_pdfs(driver, decision_links, download_subpath)
     logger.info(
