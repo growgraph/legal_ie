@@ -35,7 +35,7 @@ def visualize_nx(df, fname):
     G = nx.DiGraph()
     G.add_edges_from(edges_labeled)
 
-    _ = plt.figure(1, figsize=(30, 15), dpi=300)
+    fig = plt.figure(1, figsize=(30, 15), dpi=300)
 
     pos = nx.nx_agraph.graphviz_layout(G)
 
@@ -54,6 +54,7 @@ def visualize_nx(df, fname):
     # Draw edge labels
     edge_labels = nx.get_edge_attributes(G, "relation")
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
+    fig.tight_layout()
     plt.savefig(fname, dpi=300, bbox_inches="tight")
 
 
