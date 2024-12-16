@@ -9,6 +9,7 @@ import rdflib
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from legal_ie.util import extract_struct, render_response
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +30,9 @@ def main(input_path, onto_path, env_path):
 
     onto_str = g_onto.serialize(format="turtle")
 
-    query_json = suthing.FileHandle.load(fpath=input_path)
+    with open(input_path) as f:
+        query_json = json.load(f)
+
     query_text = query_json["text"]
 
     r = render_response(onto_str, text=query_text, llm=llm)

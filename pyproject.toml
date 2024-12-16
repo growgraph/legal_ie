@@ -17,7 +17,6 @@ pandas = "^2.2.3"
 python = "^3.10"
 rdflib = "^7.1.1"
 selenium = "^4.27.1"
-suthing = {git = "ssh://git@github.com/growgraph/suthing.git", rev = "v0.2.10"}
 tqdm = "^4.67.1"
 
 [tool.poetry.group.dev.dependencies]
