@@ -27,7 +27,7 @@ def visualize(g, path):
     dg.write_png(path)
 
 
-def visualize_nx(df, fname):
+def visualize_nx(df, fname, scale=1):
     edges_labeled = [
         (*item[["subject", "object"]], {"relation": item["predicate"]})
         for _, item in df.iterrows()
@@ -35,7 +35,7 @@ def visualize_nx(df, fname):
     G = nx.DiGraph()
     G.add_edges_from(edges_labeled)
 
-    fig = plt.figure(1, figsize=(30, 15), dpi=300)
+    _ = plt.figure(1, figsize=(scale * 30, scale * 15), dpi=300)
 
     pos = nx.nx_agraph.graphviz_layout(G)
 
@@ -54,30 +54,36 @@ def visualize_nx(df, fname):
     # Draw edge labels
     edge_labels = nx.get_edge_attributes(G, "relation")
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
-    fig.tight_layout()
     plt.savefig(fname, dpi=300, bbox_inches="tight")
 
 
 def render_response(onto_str: str, text: str, llm):
     prompt = """You are an ontological triple extraction expert in criminal law.
         Please generate ontological triples in turtle (ttl) format from the text below.
-        Use known namespaces such as schema.org.
         Be guided by the following extra ontology 
 
         ```ttl
         {ontology}
         ```
 
-        For  and add them to <https://growgraph.dev/criminal#> (if not already present). 
-        Be as specific as possible in parsing:
+        Please respect the following:
 
-         - if there are many mentions, split them (e.g. several instances of Punishment)
+         - while the input text is in French, make sure all generated literals are in English, except proper names
+         - be as specific as possible, respect the granularity provided by the ontology <https://growgraph.dev/fcaont#>: 
+            - describe the age and social status of people involved
+            - describe the offenses and the punishment with respect to the ontology, if there are several, provide all of them            
          - represent durations as xsd:duration in ISO 8601 format
-         - try to represent details and classify, where possible. E.g. prior convictions, types of offences etc
-         - the input text is in French, but in response define types, classes and properties use English
-         - do not forget to provide all used prefixes
+         - NB: feel free to add new classes new and/or relations to <https://growgraph.dev/fcaont#>, if necessary for accuracy
+         - pay attention to disambiguation: it is possible that the same entity is mentioned several times in the text, but only one instance should be added to semantic store 
+         - provide all used namespaces in the header (all prefixes should be defined)
 
-        For previously unseen generic (specific) entities please use `@prefix cu: <https://growgraph.dev/current#> .`
+        For entities that represent instances (specific to the document) use the namespace `@prefix cu: <https://growgraph.dev/current#> .`
+        
+        Please return two blocks:
+        1. the extracted triples in a block marked as ```ttl ```
+        2. A comments' block marked as ```remarks ```
+        Remarks should be concise, concrete and itemized.
+        Remarks can only concern performed modifications to fca: ontology, suggestions on improvement of ontology, or controversies that observed in the data. 
 
         Input text
         ```

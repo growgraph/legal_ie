@@ -11,14 +11,16 @@ version = "0.1.0"
 
 [tool.poetry.dependencies]
 click = "^8.1.7"
-langchain-openai = "^0.2.5"
+langchain = "^0.3.12"
+langchain-openai = "^0.2.12"
 networkx = "^3.4.2"
 pandas = "^2.2.3"
+pymupdf = "^1.25.1"
 python = "^3.10"
+python-dotenv = "^1.0.1"
 rdflib = "^7.1.1"
 selenium = "^4.27.1"
 tqdm = "^4.67.1"
-python-dotenv = "^1.0.1"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.1.1"

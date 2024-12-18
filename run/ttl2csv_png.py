@@ -35,8 +35,7 @@ def proc(ttl_fname, plot):
         df_reduced = df.loc[~mask_trivial]
 
         visualize_nx(
-            df_reduced,
-            ".".join(ttl_fname.split(".")[:-1] + ["nx.png"]),
+            df_reduced, ".".join(ttl_fname.split(".")[:-1] + ["nx.png"]), scale=1.1
         )
 
 

@@ -1,0 +1,539 @@
+@prefix schema: <https://schema.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fca: <http://growgraph.dev/fcaont#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://growgraph.dev/fcaont#> a owl:Ontology ;
+    rdfs:label "French (Supreme) Court of Appeal Ontology" ;
+    dcterms:creator "Alexander Belikov" ;
+    dcterms:created "2024-12-18" ;
+    owl:versionInfo "3.0" ;
+    dcterms:license "https://creativecommons.org/licenses/by/4.0/" .
+
+
+# Classes
+schema:Event a rdfs:Class .
+schema:Person a rdfs:Class .
+schema:Organization a rdfs:Class .
+fca:Conviction a rdfs:Class ;
+    rdfs:label "Conviction" ;
+    rdfs:comment "Legal decision regarding guilt of an accused individual." .
+
+fca:Offence a rdfs:Class ;
+    rdfs:label "Offence" ;
+    rdfs:comment "An act or omission which constitutes a criminal wrongdoing." ;
+    rdfs:subClassOf schema:Event .
+
+
+fca:hasOffenseType a rdf:Property ;
+    rdfs:label "has Offense Type" ;
+    rdfs:comment "Relates an offense to its offense type." ;
+    rdfs:domain fca:Offence ;
+    rdfs:range fca:OffenseType .
+
+
+fca:Fact a rdfs:Class ;
+    rdfs:label "Fact" ;
+    rdfs:comment "A fact related to an event or offence in criminal cases." .
+
+fca:Victim a rdfs:Class ;
+    rdfs:label "Victim" ;
+    rdfs:comment "The individual or entity harmed by a criminal act." ;
+    rdfs:subClassOf schema:Person .
+
+fca:Suspect a rdfs:Class ;
+    rdfs:label "Suspect" ;
+    rdfs:comment "Individual believed to have committed an offence." ;
+    rdfs:subClassOf schema:Person .
+
+fca:Convict a rdfs:Class ;
+    rdfs:label "Convict" ;
+    rdfs:comment "Individual found guilty of an offence." ;
+    rdfs:subClassOf schema:Person .
+
+# Properties
+
+fca:issues a rdf:Property ;
+    rdfs:label "issues" ;
+    rdfs:comment "Indicates that an organization issues or triggers an event." ;
+    rdfs:domain schema:Organization ;
+    rdfs:range schema:Event .
+
+fca:takesPlaceOn a rdf:Property ;
+    rdfs:label "takesPlaceOn" ;
+    rdfs:comment "Specifies the date on which an event occurs." ;
+    rdfs:domain schema:Event ;
+    rdfs:range schema:Date .
+
+fca:contains a rdf:Property ;
+    rdfs:label "contains" ;
+    rdfs:comment "Denotes events or facts involved in a related event." ;
+    rdfs:domain schema:Event ;
+    rdfs:range schema:Event .
+
+fca:hasConviction a rdf:Property ;
+    rdfs:label "hasConviction" ;
+    rdfs:domain schema:Person ;
+    rdfs:range fca:Conviction ;
+    rdfs:comment "Indicates a person’s conviction." .
+
+fca:hasPunishment a rdf:Property ;
+    rdfs:label "hasPunishment" ;
+    rdfs:domain fca:Conviction ;
+    rdfs:range fca:Punishment ;
+    rdfs:comment "Indicates a punishment related to a conviction." .
+
+
+fca:isAssociatedWith a rdf:Property ;
+    rdfs:label "isAssociatedWith" ;
+    rdfs:domain fca:Conviction ;
+    rdfs:range fca:Offence ;
+    rdfs:comment "Associates a conviction with an offence." .
+
+fca:concerns a rdf:Property ;
+    rdfs:label "concerns" ;
+    rdfs:comment "Describes the involvement of an event in another event or issue." ;
+    rdfs:domain schema:Event ;
+    rdfs:range schema:Event .
+
+fca:hasFact a rdf:Property ;
+    rdfs:label "hasFact" ;
+    rdfs:comment "Indicates a fact associated with an event." ;
+    rdfs:domain schema:Event ;
+    rdfs:range fca:Fact .
+
+fca:prosecutes a rdf:Property ;
+    rdfs:label "prosecutes" ;
+    rdfs:comment "Indicates that a person is prosecuting an event." ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Event .
+
+fca:initiates a rdf:Property ;
+    rdfs:label "initiates" ;
+    rdfs:comment "Describes the initiation of an event by a person." ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Event .
+
+fca:residesAt a rdf:Property ;
+    rdfs:label "residesAt" ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Place ;
+    rdfs:comment "Indicates the residence of a person." .
+
+fca:hasProfession a rdf:Property ;
+    rdfs:label "hasProfession" ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Occupation ;
+    rdfs:comment "Indicates the profession of a person." .
+
+fca:hasMaritalStatus a rdf:Property ;
+    rdfs:label "hasMaritalStatus" ;
+    rdfs:domain schema:Person ;
+    rdfs:range fca:MaritalStatus ;
+    rdfs:comment "Indicates the marital status of a person." .
+
+
+fca:MaritalStatus a rdfs:Class ;
+    rdfs:label "Marital Status" ;
+    rdfs:comment "Marital status of a person, e.g., single, married, divorced, pacs, widowed." ;
+    owl:oneOf (fca:Single fca:Married fca:Divorced fca:Pacs fca:Widowed) .
+
+fca:Single a fca:MaritalStatus ;
+    rdfs:label "Single" ;
+    rdfs:comment "Person is not married or in a legal partnership." .
+
+fca:Married a fca:MaritalStatus ;
+    rdfs:label "Married" ;
+    rdfs:comment "Person is legally married." .
+
+fca:Divorced a fca:MaritalStatus ;
+    rdfs:label "Divorced" ;
+    rdfs:comment "Person is legally divorced." .
+
+fca:Pacs a fca:MaritalStatus ;
+    rdfs:label "PACS" ;
+    rdfs:comment "Person is in a French civil partnership (PACS)." .
+
+fca:Widowed a fca:MaritalStatus ;
+    rdfs:label "Widowed" ;
+    rdfs:comment "Person's spouse has passed away." .
+
+
+fca:knows a rdf:Property ;
+    rdfs:label "knows" ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Person ;
+    rdfs:comment "Indicates acquaintance or relation between two persons." .
+
+fca:hasChildren a rdf:Property ;
+    rdfs:label "hasChildren" ;
+    rdfs:domain schema:Person ;
+    rdfs:range schema:Number ;
+    rdfs:comment "Specifies the number of children a person has." .
+
+# Property for resources
+fca:possessesResource a rdf:Property ;
+    rdfs:label "possesses Resource" ;
+    rdfs:domain schema:Person ;
+    rdfs:range fca:Resource ;
+    rdfs:comment "Indicates a resource or asset possessed by a person." .
+
+# Resource superclass
+fca:Resource a rdfs:Class ;
+    rdfs:label "Resource" ;
+    rdfs:comment "An asset or resource associated with a person." .
+
+# Subclasses of Resource
+fca:MonetaryFund a rdfs:Class ;
+    rdfs:subClassOf fca:Resource ;
+    rdfs:label "Monetary Fund" ;
+    rdfs:comment "A financial resource such as money or savings." .
+
+fca:RealEstate a rdfs:Class ;
+    rdfs:subClassOf fca:Resource ;
+    rdfs:label "Real Estate" ;
+    rdfs:comment "A resource in the form of property or land." .
+
+fca:NoResource a rdfs:Class ;
+    rdfs:subClassOf fca:Resource ;
+    rdfs:label "No Resource" ;
+    rdfs:comment "Represents the absence of financial or material resources." .
+
+
+fca:hasRole a rdf:Property ;
+    rdfs:domain schema:Person ;
+    rdfs:range fca:Role ;
+    rdfs:label "has role" ;
+    rdfs:comment "Associates a person with a role they play in a specific context." .
+
+# Define the Role class
+fca:Role a rdfs:Class ;
+    rdfs:label "Role" ;
+    rdfs:comment "A role that a person can have in a specific context." .
+
+# Define specific roles as subclasses of Role
+fca:Victim a rdfs:Class ;
+    rdfs:subClassOf fca:Role ;
+    rdfs:label "Victim" ;
+    rdfs:comment "A person who has been harmed or affected by a crime." .
+
+fca:Suspect a rdfs:Class ;
+    rdfs:subClassOf fca:Role ;
+    rdfs:label "Suspect" ;
+    rdfs:comment "A person suspected of involvement in a crime." .
+
+fca:Convict a rdfs:Class ;
+    rdfs:subClassOf fca:Role ;
+    rdfs:label "Convict" ;
+    rdfs:comment "A person who has been found guilty of a crime." .
+
+# Events and Procedures
+schema:Event a rdfs:Class .
+
+fca:Judgement a rdfs:Class ;
+    rdfs:subClassOf schema:Event ;
+    rdfs:label "Judgement" ;
+    rdfs:comment "The outcome or decision resulting from a legal trial or appeal." .
+
+
+fca:Trial a rdfs:Class ;
+    rdfs:subClassOf schema:Event ;
+    rdfs:label "Trial" ;
+    rdfs:comment "A legal process to determine the outcome of a case." .
+
+fca:leadsTo a rdf:Property ;
+    rdfs:label "leads To" ;
+    rdfs:domain schema:Event ;
+    rdfs:range schema:Event ;
+    rdfs:comment "Indicates that one event leads to another event in a legal process." .
+
+fca:Appeal a rdfs:Class ;
+    rdfs:subClassOf schema:Event ;
+    rdfs:label "Appeal" ;
+    rdfs:comment "A legal process in which a party requests a review of a trial's judgement." .
+
+
+fca:hasAppealId a rdf:Property ;
+    rdfs:label "has Appeal ID" ;
+    rdfs:comment "The unique identifier assigned to an appeal."@en ;
+    rdfs:domain fca:Appeal ;
+    rdfs:range xsd:string .
+
+fca:Court a rdfs:Class ;
+    rdfs:subClassOf schema:Organization ;
+    rdfs:label "Judgement Court" ;
+    rdfs:comment "A court where judgements and appeals are made." .
+
+
+fca:challenges a rdf:Property ;
+    rdfs:label "challenges" ;
+    rdfs:domain fca:Appeal ;
+    rdfs:range fca:Trial ;
+    rdfs:comment "Indicates the trial being challenged by an appeal." .
+
+
+# Punishment Ontology
+fca:Punishment a rdfs:Class ;
+    rdfs:label "Punishment" ;
+    rdfs:comment "Abstract base class for all types of legal punishments, imposed on a person as a result of a conviction." .
+
+fca:CustodialPunishment a rdfs:Class ;
+    rdfs:subClassOf fca:Punishment ;
+    rdfs:label "Custodial Punishment" ;
+    rdfs:comment "Punishments involving confinement or detention." .
+
+fca:NonCustodialPunishment a rdfs:Class ;
+    rdfs:subClassOf fca:Punishment ;
+    rdfs:label "Non-Custodial Punishment" ;
+    rdfs:comment "Punishments that do not involve direct confinement." .
+
+fca:MonetaryPunishment a rdfs:Class ;
+    rdfs:subClassOf fca:Punishment ;
+    rdfs:label "Monetary Punishment" ;
+    rdfs:comment "Punishments involving financial penalties." .
+
+fca:Imprisonment a rdfs:Class ;
+    rdfs:subClassOf fca:CustodialPunishment ;
+    rdfs:label "Imprisonment" ;
+    rdfs:comment "Sentence requiring confinement in prison." .
+
+fca:Probation a rdfs:Class ;
+    rdfs:subClassOf fca:NonCustodialPunishment ;
+    rdfs:label "Probation" ;
+    rdfs:comment "Supervised release without confinement." .
+
+fca:Fine a rdfs:Class ;
+    rdfs:subClassOf fca:MonetaryPunishment ;
+    rdfs:label "Fine" ;
+    rdfs:comment "Monetary penalty imposed as punishment." .
+
+fca:monetaryAmount a rdf:Property ;
+    rdfs:label "monetary Amount" ;
+    rdfs:domain fca:Fine ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "The numerical amount of the financial penalty" .
+
+fca:currencyCode a rdf:Property ;
+    rdfs:label "Currency Code" ;
+    rdfs:domain fca:Fine ;
+    rdfs:range xsd:string ;
+    rdfs:comment "ISO 4217 currency code" .
+
+
+fca:IneligibilityPunishment a rdfs:Class ;
+    rdfs:subClassOf fca:NonCustodialPunishment ;
+    rdfs:label "Ineligibility Punishment" ;
+    rdfs:comment "Non-custodial punishments involving loss of rights or privileges" .
+
+
+fca:ProfessionalIneligibility a rdfs:Class ;
+    rdfs:subClassOf fca:IneligibilityPunishment ;
+    rdfs:label "Professional Ineligibility" ;
+    rdfs:comment "Punishment restricting professional practice or licensing." .
+
+fca:CivilRightsIneligibility a rdfs:Class ;
+    rdfs:subClassOf fca:IneligibilityPunishment ;
+    rdfs:label "Civil Rights Ineligibility" ;
+    rdfs:comment "Punishment involving loss of specific civil rights." .
+
+fca:ElectoralIneligibility a rdfs:Class ;
+    rdfs:subClassOf fca:IneligibilityPunishment ;
+    rdfs:label "Electoral Ineligibility" ;
+    rdfs:comment "Punishment restricting voting or running for public office." .
+
+### Properties
+
+# Event properties
+fca:takesPlaceAt a rdf:Property ;
+    rdfs:label "takesPlaceAt" ;
+    rdfs:domain schema:Event ;
+    rdfs:range schema:Place ;
+    rdfs:comment "Specifies the location at which an event occurs." .
+
+fca:hasParticipant a rdf:Property ;
+    rdfs:label "hasParticipant" ;
+    rdfs:domain schema:Event ;
+    rdfs:range schema:Person ;
+    rdfs:comment "Defines a participant in an event." .
+
+# Punishment properties
+fca:hasDuration a rdf:Property ;
+    rdfs:label "has Duration" ;
+    rdfs:domain fca:CustodialPunishment ;
+    rdfs:range xsd:duration ;
+    rdfs:comment "The length of time for a custodial punishment." .
+
+fca:monetaryAmount a rdf:Property ;
+    rdfs:label "monetary Amount" ;
+    rdfs:domain fca:MonetaryPunishment ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "The monetary value of a financial penalty." .
+
+fca:ineligibilityDuration a rdf:Property ;
+    rdfs:label "ineligibility Duration" ;
+    rdfs:domain fca:IneligibilityPunishment ;
+    rdfs:range xsd:duration ;
+    rdfs:comment "The period for which the ineligibility applies." .
+
+
+fca:isAssociatedWith a rdf:Property ;
+    rdfs:label "isAssociatedWith" ;
+    rdfs:domain fca:Judgement ;
+    rdfs:range fca:Offence ;
+    rdfs:comment "Associates a judgement with a specific offence." .
+
+fca:heardAt a rdf:Property ;
+    rdfs:label "heardAt" ;
+    rdfs:domain fca:Judgement ;
+    rdfs:range fca:Court ;
+    rdfs:comment "Specifies the court where the judgement was made." .
+
+fca:appealsTo a rdf:Property ;
+    rdfs:label "appealsTo" ;
+    rdfs:domain fca:Appeal ;
+    rdfs:range fca:Court ;
+    rdfs:comment "Specifies the court where the appeal was filed." .
+
+
+fca:CustodialPunishment owl:disjointWith fca:NonCustodialPunishment .
+fca:Victim owl:disjointWith fca:Suspect .
+
+
+fca:Convict a owl:Class ;
+    owl:equivalentClass [
+        a owl:Restriction ;
+        owl:onProperty fca:hasConviction ;
+        owl:minCardinality 1
+    ] ;
+    rdfs:label "Convict" ;
+    rdfs:comment "A person who has at least one conviction." .
+
+
+
+fca:OffenseType a rdfs:Class ;
+    rdfs:label "Offense Type" ;
+    rdfs:comment "General categories of criminal offenses." .
+
+fca:ViolentOffense a rdfs:Class ;
+    rdfs:subClassOf fca:OffenseType ;
+    rdfs:label "Violent Offense" ;
+    rdfs:comment "Offenses involving violence or threat of harm to individuals." .
+
+fca:PropertyOffense a rdfs:Class ;
+    rdfs:subClassOf fca:OffenseType ;
+    rdfs:label "Property Offense" ;
+    rdfs:comment "Offenses involving damage to or theft of property." .
+
+fca:DrugOffense a rdfs:Class ;
+    rdfs:subClassOf fca:OffenseType ;
+    rdfs:label "Drug Offense" ;
+    rdfs:comment "Offenses related to illegal substances, including possession, trafficking, and production." .
+
+fca:WhiteCollarOffense a rdfs:Class ;
+    rdfs:subClassOf fca:OffenseType ;
+    rdfs:label "White Collar Offense" ;
+    rdfs:comment "Non-violent offenses typically committed in commercial contexts, such as fraud or embezzlement." .
+
+
+fca:CyberCrime a rdfs:Class ;
+    rdfs:subClassOf fca:OffenseType ;
+    rdfs:label "Cyber Crime" ;
+    rdfs:comment "Offenses committed using computers or digital networks" .
+
+fca:PublicOrderCrime a rdfs:Class ;
+    rdfs:subClassOf fca:OffenseType ;
+    rdfs:label "Public Order Crime" ;
+    rdfs:comment "Offenses that disrupt public peace or social norms" .
+
+fca:Homicide a rdfs:Class ;
+    rdfs:subClassOf fca:ViolentOffense ;
+    rdfs:label "Homicide" ;
+    rdfs:comment "Unlawful killing of another person with malice aforethought" .
+
+fca:Assault a rdfs:Class ;
+    rdfs:subClassOf fca:ViolentOffense ;
+    rdfs:label "Assault" ;
+    rdfs:comment "Physical attack or threat of violence against another person" .
+
+fca:Robbery a rdfs:Class ;
+    rdfs:subClassOf fca:ViolentOffense ;
+    rdfs:label "Robbery" ;
+    rdfs:comment "Theft involving direct confrontation or threat of violence" .
+
+# Property Crimes
+fca:Theft a rdfs:Class ;
+    rdfs:subClassOf fca:PropertyOffense ;
+    rdfs:label "Theft" ;
+    rdfs:comment "Unlawful taking of another's property without consent" .
+
+fca:Burglary a rdfs:Class ;
+    rdfs:subClassOf fca:PropertyOffense ;
+    rdfs:label "Burglary" ;
+    rdfs:comment "Unauthorized entry into a structure to commit a crime" .
+
+fca:Vandalism a rdfs:Class ;
+    rdfs:subClassOf fca:PropertyOffense ;
+    rdfs:label "Vandalism" ;
+    rdfs:comment "Deliberate destruction or damage to property" .
+
+# White Collar Crimes
+fca:Fraud a rdfs:Class ;
+    rdfs:subClassOf fca:WhiteCollarOffense ;
+    rdfs:label "Fraud" ;
+    rdfs:comment "Intentional deception for financial or personal gain" .
+
+fca:Embezzlement a rdfs:Class ;
+    rdfs:subClassOf fca:WhiteCollarOffense ;
+    rdfs:label "Embezzlement" ;
+    rdfs:comment "Misappropriation of funds entrusted to an individual" .
+
+fca:MoneyLaundering a rdfs:Class ;
+    rdfs:subClassOf fca:WhiteCollarOffense ;
+    rdfs:label "Money Laundering" ;
+    rdfs:comment "Concealing the origins of illegally obtained money" .
+
+# Cyber Crimes
+fca:Hacking a rdfs:Class ;
+    rdfs:subClassOf fca:CyberCrime ;
+    rdfs:label "Hacking" ;
+    rdfs:comment "Unauthorized access to computer systems or networks" .
+
+fca:Phishing a rdfs:Class ;
+    rdfs:subClassOf fca:CyberCrime ;
+    rdfs:label "Phishing" ;
+    rdfs:comment "Fraudulent attempt to obtain sensitive information online" .
+
+# Public Order Crimes
+fca:PublicIntoxication a rdfs:Class ;
+    rdfs:subClassOf fca:PublicOrderCrime ;
+    rdfs:label "Public Intoxication" ;
+    rdfs:comment "Being visibly intoxicated in a public space" .
+
+fca:Disorderly_Conduct a rdfs:Class ;
+    rdfs:subClassOf fca:PublicOrderCrime ;
+    rdfs:label "Disorderly Conduct" ;
+    rdfs:comment "Behavior that disturbs public peace or order" .
+
+
+fca:hasSeverity a rdf:Property ;
+    rdfs:label "has Severity" ;
+    rdfs:comment "Indicates the severity of an offense (e.g., misdemeanor, felony)." ;
+    rdfs:domain fca:Offence ;
+    rdfs:range fca:SeverityLevel .
+
+fca:SeverityLevel a rdfs:Class ;
+    owl:oneOf (fca:Misdemeanor fca:Felony) ;
+    rdfs:label "Severity Level" ;
+    rdfs:comment "Enumerates levels of offense severity." .
+
+fca:Misdemeanor a fca:SeverityLevel ;
+    rdfs:label "Misdemeanor" ;
+    rdfs:comment "A less serious criminal offense." .
+
+fca:Felony a fca:SeverityLevel ;
+    rdfs:label "Felony" ;
+    rdfs:comment "A more serious criminal offense." .
