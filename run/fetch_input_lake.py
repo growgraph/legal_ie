@@ -1,3 +1,9 @@
+"""
+scrape appeal pdfs from www.courdecassation.fr
+
+
+"""
+
 import pandas as pd
 import pathlib
 import click

@@ -1,36 +1,72 @@
 subject,predicate,object
-<nb33b8140955b4502af2a4a5b66ec3e8db6>,owl:minCardinality,<1>
+<n4256a20531334a9f9f28d17f0d0f700ab6>,owl:minCardinality,<1>
+<n4256a20531334a9f9f28d17f0d0f700ab9>,owl:maxCardinality,<1>
 <https://growgraph.dev/fcaont#>,dcterms:created,<2024-12-18>
 <https://growgraph.dev/fcaont#>,owl:versionInfo,<3.0>
-fca:Court,rdfs:comment,<A court where judgements and appeals are made.>
+fca:AppealCassationPartial,rdfs:comment,<A cassation that partially overturns the original decision.>
+fca:Lawyer,rdfs:comment,"<A class representing a lawyer, who may be an individual or an organization.>"
+fca:Case,rdfs:comment,<A class representing a legal case.>
+fca:AppealDecision,rdfs:comment,<A class representing the decision outcome of an appeal.>
 fca:Fact,rdfs:comment,<A fact related to an event or offence in criminal cases.>
 fca:MonetaryFund,rdfs:comment,<A financial resource such as money or savings.>
+fca:Court,rdfs:comment,"<A legal body that makes decisions in legal cases (judgements, appeals, etc).>"
 fca:Appeal,rdfs:comment,<A legal process in which a party requests a review of a trial's judgement.>
 fca:Trial,rdfs:comment,<A legal process to determine the outcome of a case.>
 fca:Misdemeanor,rdfs:comment,<A less serious criminal offense.>
 fca:Felony,rdfs:comment,<A more serious criminal offense.>
+fca:AppealCassationPartialWithoutReferral,rdfs:comment,<A partial cassation that does not involve a referral to a lower court.>
+fca:AppealCassationPartialWithRejection,rdfs:comment,<A partial cassation where some parts are upheld and others are rejected.>
+fca:Lawyer,rdfs:comment,<A person or organization representing a party in a legal case.>
 fca:Suspect,rdfs:comment,<A person suspected of involvement in a crime.>
 fca:Convict,rdfs:comment,<A person who has at least one conviction.>
-fca:Convict,rdfs:comment,<A person who has been found guilty of a crime.>
 fca:Victim,rdfs:comment,<A person who has been harmed or affected by a crime.>
 fca:RealEstate,rdfs:comment,<A resource in the form of property or land.>
 fca:Role,rdfs:comment,<A role that a person can have in a specific context.>
 fca:Punishment,rdfs:comment,"<Abstract base class for all types of legal punishments, imposed on a person as a result of a conviction.>"
-<https://growgraph.dev/fcaont#>,dcterms:creator,<Alexander Belikov>
 fca:Offence,rdfs:comment,<An act or omission which constitutes a criminal wrongdoing.>
 fca:Resource,rdfs:comment,<An asset or resource associated with a person.>
+fca:hasAppealDeadline,rdfs:label,<Appeal Deadline>
+fca:AppealDecision,rdfs:label,<Appeal Decision>
+fca:AppealGround,rdfs:label,<Appeal Ground>
+fca:AppealModified,rdfs:label,<Appeal Modified>
+fca:AppealPartiallyUpheld,rdfs:label,<Appeal Partially Upheld>
+fca:AppealRejected,rdfs:label,<Appeal Rejected>
+fca:AppealUpheld,rdfs:label,<Appeal Upheld>
 fca:Appeal,rdfs:label,<Appeal>
+fca:LegalArticle,rdfs:label,<Article de loi>
 fca:Assault,rdfs:label,<Assault>
+fca:hasJudgment,rdfs:comment,<Associates a case with its judgment.>
 fca:isAssociatedWith,rdfs:comment,<Associates a conviction with an offence.>
 fca:isAssociatedWith,rdfs:comment,<Associates a judgement with a specific offence.>
 fca:hasRole,rdfs:comment,<Associates a person with a role they play in a specific context.>
+fca:LegalBasis,rdfs:label,<Base légale>
 fca:Disorderly_Conduct,rdfs:comment,<Behavior that disturbs public peace or order>
 fca:PublicIntoxication,rdfs:comment,<Being visibly intoxicated in a public space>
 fca:Burglary,rdfs:label,<Burglary>
+fca:Case,rdfs:label,<Case>
+fca:AppealCassationWithoutReferral,rdfs:label,<Cassation Without Referral>
+fca:AppealCassation,rdfs:label,<Cassation>
+fca:ChamberType,rdfs:label,<Chamber Type>
+fca:CommercialChamber,rdfs:comment,<Chamber handling business and commercial law cases.>
+fca:CivilChamber,rdfs:comment,<Chamber handling civil law cases.>
+fca:SocialChamber,rdfs:comment,<Chamber handling labor and social security cases.>
+fca:CivilChamber,rdfs:label,<Chambre civile>
+fca:CommercialChamber,rdfs:label,<Chambre commerciale>
+fca:CriminalChamber,rdfs:label,<Chambre criminelle>
+fca:SocialChamber,rdfs:label,<Chambre sociale>
+fca:CivilChamber,rdfs:label,<Civil Chamber>
 fca:CivilRightsIneligibility,rdfs:label,<Civil Rights Ineligibility>
+fca:CommercialChamber,rdfs:label,<Commercial Chamber>
 fca:MoneyLaundering,rdfs:comment,<Concealing the origins of illegally obtained money>
 fca:Convict,rdfs:label,<Convict>
 fca:Conviction,rdfs:label,<Conviction>
+fca:Cassation,rdfs:label,<Cour de cassation>
+fca:ReferralCourt,rdfs:label,<Cour de renvoi>
+fca:Court,rdfs:label,<Cour>
+fca:Cassation,rdfs:label,<Court of Cassation>
+fca:FirstInstance,rdfs:comment,<Court that hears a case for the first time.>
+fca:Court,rdfs:label,<Court>
+fca:CriminalChamber,rdfs:label,<Criminal Chamber>
 fca:currencyCode,rdfs:label,<Currency Code>
 fca:CustodialPunishment,rdfs:label,<Custodial Punishment>
 fca:CyberCrime,rdfs:label,<Cyber Crime>
@@ -42,12 +78,14 @@ fca:concerns,rdfs:comment,<Describes the involvement of an event in another even
 fca:Disorderly_Conduct,rdfs:label,<Disorderly Conduct>
 fca:Divorced,rdfs:label,<Divorced>
 fca:DrugOffense,rdfs:label,<Drug Offense>
+fca:hasAppealDeadline,rdfs:label,<Délai de recours>
 fca:ElectoralIneligibility,rdfs:label,<Electoral Ineligibility>
 fca:Embezzlement,rdfs:label,<Embezzlement>
 fca:SeverityLevel,rdfs:comment,<Enumerates levels of offense severity.>
 fca:Fact,rdfs:label,<Fact>
 fca:Felony,rdfs:label,<Felony>
 fca:Fine,rdfs:label,<Fine>
+fca:FirstInstance,rdfs:label,<First Instance Court>
 fca:Fraud,rdfs:label,<Fraud>
 fca:Phishing,rdfs:comment,<Fraudulent attempt to obtain sensitive information online>
 <https://growgraph.dev/fcaont#>,rdfs:label,<French (Supreme) Court of Appeal Ontology>
@@ -57,34 +95,47 @@ fca:Homicide,rdfs:label,<Homicide>
 fca:currencyCode,rdfs:comment,<ISO 4217 currency code>
 fca:Imprisonment,rdfs:label,<Imprisonment>
 fca:hasFact,rdfs:comment,<Indicates a fact associated with an event.>
+fca:participatesIn,rdfs:comment,<Indicates a lawyer’s participation in an appeal.>
 fca:hasConviction,rdfs:comment,<Indicates a person’s conviction.>
 fca:hasPunishment,rdfs:comment,<Indicates a punishment related to a conviction.>
 fca:possessesResource,rdfs:comment,<Indicates a resource or asset possessed by a person.>
 fca:knows,rdfs:comment,<Indicates acquaintance or relation between two persons.>
+fca:represents,rdfs:comment,<Indicates that a lawyer represents a party in a legal case or appeal.>
 fca:prosecutes,rdfs:comment,<Indicates that a person is prosecuting an event.>
 fca:issues,rdfs:comment,<Indicates that an organization issues or triggers an event.>
 fca:leadsTo,rdfs:comment,<Indicates that one event leads to another event in a legal process.>
+fca:AppealUpheld,rdfs:comment,"<Indicates that the appeal was fully upheld, overturning the original decision.>"
+fca:AppealPartiallyUpheld,rdfs:comment,"<Indicates that the appeal was partially upheld, modifying part of the original decision.>"
+fca:AppealRejected,rdfs:comment,<Indicates that the appeal was rejected by the court.>
+fca:AppealModified,rdfs:comment,<Indicates that the decision was modified without fully upholding the appeal.>
+fca:leadsCase,rdfs:comment,<Indicates the lawyer leading a specific case.>
 fca:hasMaritalStatus,rdfs:comment,<Indicates the marital status of a person.>
 fca:hasProfession,rdfs:comment,<Indicates the profession of a person.>
 fca:residesAt,rdfs:comment,<Indicates the residence of a person.>
 fca:hasSeverity,rdfs:comment,"<Indicates the severity of an offense (e.g., misdemeanor, felony).>"
 fca:challenges,rdfs:comment,<Indicates the trial being challenged by an appeal.>
-fca:Suspect,rdfs:comment,<Individual believed to have committed an offence.>
-fca:Convict,rdfs:comment,<Individual found guilty of an offence.>
 fca:IneligibilityPunishment,rdfs:label,<Ineligibility Punishment>
 fca:Fraud,rdfs:comment,<Intentional deception for financial or personal gain>
-fca:Court,rdfs:label,<Judgement Court>
+fca:citedInCase,rdfs:comment,<Inverse property to link a legal basis to cases where it is cited.>
 fca:Judgement,rdfs:label,<Judgement>
+fca:Lawyer,rdfs:label,<Lawyer>
+fca:Lawyer,rdfs:label,<Lawyer>
+fca:LegalArticle,rdfs:label,<Legal Article>
+fca:LegalBasis,rdfs:label,<Legal Basis>
 fca:Conviction,rdfs:comment,<Legal decision regarding guilt of an accused individual.>
+fca:LegalBasis,rdfs:comment,<Legal references and articles used in court decisions.>
+fca:referencesLegalBasis,rdfs:comment,<Links a case to the legal basis it references.>
 fca:MaritalStatus,rdfs:label,<Marital Status>
 fca:MaritalStatus,rdfs:comment,"<Marital status of a person, e.g., single, married, divorced, pacs, widowed.>"
 fca:Married,rdfs:label,<Married>
+fca:PublicProsecutor,rdfs:label,<Ministère public>
 fca:Embezzlement,rdfs:comment,<Misappropriation of funds entrusted to an individual>
 fca:Misdemeanor,rdfs:label,<Misdemeanor>
 fca:MonetaryFund,rdfs:label,<Monetary Fund>
 fca:MonetaryPunishment,rdfs:label,<Monetary Punishment>
 fca:Fine,rdfs:comment,<Monetary penalty imposed as punishment.>
 fca:MoneyLaundering,rdfs:label,<Money Laundering>
+fca:AppealGround,rdfs:label,<Moyen de cassation>
 fca:NoResource,rdfs:label,<No Resource>
 fca:NonCustodialPunishment,rdfs:label,<Non-Custodial Punishment>
 fca:IneligibilityPunishment,rdfs:comment,<Non-custodial punishments involving loss of rights or privileges>
@@ -97,6 +148,9 @@ fca:ViolentOffense,rdfs:comment,<Offenses involving violence or threat of harm t
 fca:DrugOffense,rdfs:comment,"<Offenses related to illegal substances, including possession, trafficking, and production.>"
 fca:PublicOrderCrime,rdfs:comment,<Offenses that disrupt public peace or social norms>
 fca:Pacs,rdfs:label,<PACS>
+fca:AppealCassationPartialWithoutReferral,rdfs:label,<Partial Cassation Without Referral>
+fca:AppealCassationPartialWithRejection,rdfs:label,<Partial Cassation with Rejection>
+fca:AppealCassationPartial,rdfs:label,<Partial Cassation>
 fca:Pacs,rdfs:comment,<Person is in a French civil partnership (PACS).>
 fca:Divorced,rdfs:comment,<Person is legally divorced.>
 fca:Married,rdfs:comment,<Person is legally married.>
@@ -107,8 +161,10 @@ fca:Assault,rdfs:comment,<Physical attack or threat of violence against another 
 fca:Probation,rdfs:label,<Probation>
 fca:ProfessionalIneligibility,rdfs:label,<Professional Ineligibility>
 fca:PropertyOffense,rdfs:label,<Property Offense>
+fca:hasChamberType,rdfs:comment,<Property linking a court to its chamber type(s).>
 fca:PublicIntoxication,rdfs:label,<Public Intoxication>
 fca:PublicOrderCrime,rdfs:label,<Public Order Crime>
+fca:PublicProsecutor,rdfs:label,<Public Prosecutor>
 fca:CivilRightsIneligibility,rdfs:comment,<Punishment involving loss of specific civil rights.>
 fca:ProfessionalIneligibility,rdfs:comment,<Punishment restricting professional practice or licensing.>
 fca:ElectoralIneligibility,rdfs:comment,<Punishment restricting voting or running for public office.>
@@ -117,6 +173,9 @@ fca:CustodialPunishment,rdfs:comment,<Punishments involving confinement or deten
 fca:MonetaryPunishment,rdfs:comment,<Punishments involving financial penalties.>
 fca:NonCustodialPunishment,rdfs:comment,<Punishments that do not involve direct confinement.>
 fca:RealEstate,rdfs:label,<Real Estate>
+fca:ReferralCourt,rdfs:label,<Referral Court>
+fca:hasAppealDecision,rdfs:comment,<Relates a case to its appeal decision.>
+fca:representsCase,rdfs:comment,<Relates a lawyer to the case they are representing.>
 fca:hasOffenseType,rdfs:comment,<Relates an offense to its offense type.>
 fca:NoResource,rdfs:comment,<Represents the absence of financial or material resources.>
 fca:Resource,rdfs:label,<Resource>
@@ -125,22 +184,29 @@ fca:Role,rdfs:label,<Role>
 fca:Imprisonment,rdfs:comment,<Sentence requiring confinement in prison.>
 fca:SeverityLevel,rdfs:label,<Severity Level>
 fca:Single,rdfs:label,<Single>
+fca:SocialChamber,rdfs:label,<Social Chamber>
+fca:AppealGround,rdfs:comment,<Specific reasons for appealing a court decision.>
 fca:appealsTo,rdfs:comment,<Specifies the court where the appeal was filed.>
 fca:heardAt,rdfs:comment,<Specifies the court where the judgement was made.>
 fca:takesPlaceOn,rdfs:comment,<Specifies the date on which an event occurs.>
 fca:takesPlaceAt,rdfs:comment,<Specifies the location at which an event occurs.>
 fca:hasChildren,rdfs:comment,<Specifies the number of children a person has.>
+fca:isPersonOrOrganization,rdfs:comment,<Specifies whether a lawyer is a person or an organization.>
 fca:Probation,rdfs:comment,<Supervised release without confinement.>
+fca:Cassation,rdfs:comment,<Supreme court of the French judicial system.>
 fca:Suspect,rdfs:label,<Suspect>
-fca:Victim,rdfs:comment,<The individual or entity harmed by a criminal act.>
+fca:AppealCassationWithoutReferral,rdfs:comment,<The decision is modified by cassation without referring the case to a lower court.>
 fca:hasDuration,rdfs:comment,<The length of time for a custodial punishment.>
 fca:monetaryAmount,rdfs:comment,<The monetary value of a financial penalty.>
-fca:monetaryAmount,rdfs:comment,<The numerical amount of the financial penalty>
+fca:AppealCassation,rdfs:comment,<The original decision is overturned by cassation.>
 fca:Judgement,rdfs:comment,<The outcome or decision resulting from a legal trial or appeal.>
 fca:ineligibilityDuration,rdfs:comment,<The period for which the ineligibility applies.>
+fca:hasAppealId,rdfs:comment,<The unique identifier assigned to an appeal.>
 fca:Robbery,rdfs:comment,<Theft involving direct confrontation or threat of violence>
 fca:Theft,rdfs:label,<Theft>
 fca:Trial,rdfs:label,<Trial>
+fca:FirstInstance,rdfs:label,<Tribunal de première instance>
+fca:ChamberType,rdfs:label,<Type de chambre>
 fca:Hacking,rdfs:comment,<Unauthorized access to computer systems or networks>
 fca:Burglary,rdfs:comment,<Unauthorized entry into a structure to commit a crime>
 fca:Homicide,rdfs:comment,<Unlawful killing of another person with malice aforethought>
@@ -150,13 +216,20 @@ fca:Victim,rdfs:label,<Victim>
 fca:ViolentOffense,rdfs:label,<Violent Offense>
 fca:WhiteCollarOffense,rdfs:label,<White Collar Offense>
 fca:Widowed,rdfs:label,<Widowed>
+fca:hasChamberType,rdfs:label,<a pour type de chambre>
 fca:appealsTo,rdfs:label,<appealsTo>
 fca:challenges,rdfs:label,<challenges>
+fca:citedInCase,rdfs:label,<cited in Case>
+fca:citedInCase,rdfs:label,<cité dans un cas>
 fca:concerns,rdfs:label,<concerns>
 fca:contains,rdfs:label,<contains>
+fca:hasAppealId,rdfs:label,<has Appeal ID>
+fca:hasChamberType,rdfs:label,<has Chamber Type>
 fca:hasDuration,rdfs:label,<has Duration>
+fca:hasJudgment,rdfs:label,<has Judgment>
 fca:hasOffenseType,rdfs:label,<has Offense Type>
 fca:hasSeverity,rdfs:label,<has Severity>
+fca:hasAppealDecision,rdfs:label,<has appeal decision>
 fca:hasRole,rdfs:label,<has role>
 fca:hasChildren,rdfs:label,<hasChildren>
 fca:hasConviction,rdfs:label,<hasConviction>
@@ -169,54 +242,127 @@ fca:heardAt,rdfs:label,<heardAt>
 <https://growgraph.dev/fcaont#>,dcterms:license,<https://creativecommons.org/licenses/by/4.0/>
 fca:ineligibilityDuration,rdfs:label,<ineligibility Duration>
 fca:initiates,rdfs:label,<initiates>
+fca:isPersonOrOrganization,rdfs:label,<is Person or Organization>
 fca:isAssociatedWith,rdfs:label,<isAssociatedWith>
 fca:issues,rdfs:label,<issues>
 fca:knows,rdfs:label,<knows>
 fca:leadsTo,rdfs:label,<leads To>
+fca:leadsCase,rdfs:label,<leads case>
 fca:monetaryAmount,rdfs:label,<monetary Amount>
-fca:MaritalStatus,owl:oneOf,<nb33b8140955b4502af2a4a5b66ec3e8db1>
-<nb33b8140955b4502af2a4a5b66ec3e8db1>,rdf:rest,<nb33b8140955b4502af2a4a5b66ec3e8db2>
-<nb33b8140955b4502af2a4a5b66ec3e8db2>,rdf:rest,<nb33b8140955b4502af2a4a5b66ec3e8db3>
-<nb33b8140955b4502af2a4a5b66ec3e8db3>,rdf:rest,<nb33b8140955b4502af2a4a5b66ec3e8db4>
-<nb33b8140955b4502af2a4a5b66ec3e8db4>,rdf:rest,<nb33b8140955b4502af2a4a5b66ec3e8db5>
-fca:Convict,owl:equivalentClass,<nb33b8140955b4502af2a4a5b66ec3e8db6>
-fca:SeverityLevel,owl:oneOf,<nb33b8140955b4502af2a4a5b66ec3e8db7>
-<nb33b8140955b4502af2a4a5b66ec3e8db7>,rdf:rest,<nb33b8140955b4502af2a4a5b66ec3e8db8>
+fca:isPersonOrOrganization,owl:unionOf,<n4256a20531334a9f9f28d17f0d0f700ab10>
+<n4256a20531334a9f9f28d17f0d0f700ab10>,rdf:rest,<n4256a20531334a9f9f28d17f0d0f700ab11>
+fca:JurisdictionalLevel,owl:oneOf,<n4256a20531334a9f9f28d17f0d0f700ab12>
+<n4256a20531334a9f9f28d17f0d0f700ab12>,rdf:rest,<n4256a20531334a9f9f28d17f0d0f700ab13>
+<n4256a20531334a9f9f28d17f0d0f700ab13>,rdf:rest,<n4256a20531334a9f9f28d17f0d0f700ab14>
+fca:ChamberType,owl:oneOf,<n4256a20531334a9f9f28d17f0d0f700ab15>
+<n4256a20531334a9f9f28d17f0d0f700ab15>,rdf:rest,<n4256a20531334a9f9f28d17f0d0f700ab16>
+<n4256a20531334a9f9f28d17f0d0f700ab16>,rdf:rest,<n4256a20531334a9f9f28d17f0d0f700ab17>
+<n4256a20531334a9f9f28d17f0d0f700ab17>,rdf:rest,<n4256a20531334a9f9f28d17f0d0f700ab18>
+fca:MaritalStatus,owl:oneOf,<n4256a20531334a9f9f28d17f0d0f700ab1>
+<n4256a20531334a9f9f28d17f0d0f700ab1>,rdf:rest,<n4256a20531334a9f9f28d17f0d0f700ab2>
+<n4256a20531334a9f9f28d17f0d0f700ab2>,rdf:rest,<n4256a20531334a9f9f28d17f0d0f700ab3>
+<n4256a20531334a9f9f28d17f0d0f700ab3>,rdf:rest,<n4256a20531334a9f9f28d17f0d0f700ab4>
+<n4256a20531334a9f9f28d17f0d0f700ab4>,rdf:rest,<n4256a20531334a9f9f28d17f0d0f700ab5>
+fca:Convict,owl:equivalentClass,<n4256a20531334a9f9f28d17f0d0f700ab6>
+fca:SeverityLevel,owl:oneOf,<n4256a20531334a9f9f28d17f0d0f700ab7>
+<n4256a20531334a9f9f28d17f0d0f700ab7>,rdf:rest,<n4256a20531334a9f9f28d17f0d0f700ab8>
+fca:Case,rdfs:subClassOf,<n4256a20531334a9f9f28d17f0d0f700ab9>
+fca:participatesIn,rdfs:label,<participates In>
 fca:possessesResource,rdfs:label,<possesses Resource>
 fca:prosecutes,rdfs:label,<prosecutes>
+fca:referencesLegalBasis,rdfs:label,<references Legal Basis>
+fca:representsCase,rdfs:label,<represents case>
+fca:represents,rdfs:label,<represents>
 fca:residesAt,rdfs:label,<residesAt>
+fca:referencesLegalBasis,rdfs:label,<réfère à une base légale>
 fca:takesPlaceAt,rdfs:label,<takesPlaceAt>
 fca:takesPlaceOn,rdfs:label,<takesPlaceOn>
+<n4256a20531334a9f9f28d17f0d0f700ab13>,rdf:first,fca:Appeal
 fca:appealsTo,rdfs:domain,fca:Appeal
 fca:challenges,rdfs:domain,fca:Appeal
+fca:hasAppealDeadline,rdfs:domain,fca:Appeal
+fca:hasAppealId,rdfs:domain,fca:Appeal
+fca:isChallengedBy,rdfs:range,fca:Appeal
+fca:participatesIn,rdfs:range,fca:Appeal
+fca:AppealCassationPartialWithoutReferral,rdfs:subClassOf,fca:AppealCassationPartial
+fca:AppealModified,rdfs:subClassOf,fca:AppealDecision
+fca:AppealPartiallyUpheld,rdfs:subClassOf,fca:AppealDecision
+fca:AppealRejected,rdfs:subClassOf,fca:AppealDecision
+fca:AppealUpheld,rdfs:subClassOf,fca:AppealDecision
+fca:hasAppealDecision,rdfs:range,fca:AppealDecision
+fca:AppealCassationWithoutReferral,rdfs:subClassOf,fca:AppealModified
+fca:AppealCassationPartial,rdfs:subClassOf,fca:AppealPartiallyUpheld
+fca:AppealCassationPartialWithRejection,rdfs:subClassOf,fca:AppealPartiallyUpheld
+fca:AppealCassationPartialWithRejection,rdfs:subClassOf,fca:AppealRejected
+fca:AppealCassation,rdfs:subClassOf,fca:AppealUpheld
+fca:citedInCase,rdfs:range,fca:Case
+fca:hasAppealDecision,rdfs:domain,fca:Case
+fca:hasJudgment,rdfs:domain,fca:Case
+fca:isRepresentedBy,rdfs:domain,fca:Case
+fca:leadsCase,rdfs:range,fca:Case
+fca:referencesLegalBasis,rdfs:domain,fca:Case
+fca:represents,rdfs:range,fca:Case
+fca:representsCase,rdfs:range,fca:Case
+<n4256a20531334a9f9f28d17f0d0f700ab14>,rdf:first,fca:Cassation
+fca:CivilChamber,rdf:type,fca:ChamberType
+fca:CommercialChamber,rdf:type,fca:ChamberType
+fca:CriminalChamber,rdf:type,fca:ChamberType
+fca:SocialChamber,rdf:type,fca:ChamberType
+fca:hasChamberType,rdfs:range,fca:ChamberType
+<n4256a20531334a9f9f28d17f0d0f700ab16>,rdf:first,fca:CivilChamber
+fca:Cassation,fca:hasChamberType,fca:CivilChamber
+<n4256a20531334a9f9f28d17f0d0f700ab17>,rdf:first,fca:CommercialChamber
+fca:Cassation,fca:hasChamberType,fca:CommercialChamber
 fca:hasConviction,rdfs:range,fca:Conviction
 fca:hasPunishment,rdfs:domain,fca:Conviction
 fca:isAssociatedWith,rdfs:domain,fca:Conviction
+fca:Cassation,rdf:type,fca:Court
+fca:FirstInstance,rdf:type,fca:Court
+fca:ReferralCourt,rdfs:subClassOf,fca:Court
 fca:appealsTo,rdfs:range,fca:Court
+fca:hasChamberType,rdfs:domain,fca:Court
+fca:hasJurisdictionalLevel,rdfs:domain,fca:Court
 fca:heardAt,rdfs:range,fca:Court
+<n4256a20531334a9f9f28d17f0d0f700ab15>,rdf:first,fca:CriminalChamber
+fca:Cassation,fca:hasChamberType,fca:CriminalChamber
 fca:Imprisonment,rdfs:subClassOf,fca:CustodialPunishment
 fca:hasDuration,rdfs:domain,fca:CustodialPunishment
 fca:Hacking,rdfs:subClassOf,fca:CyberCrime
 fca:Phishing,rdfs:subClassOf,fca:CyberCrime
-<nb33b8140955b4502af2a4a5b66ec3e8db3>,rdf:first,fca:Divorced
+<n4256a20531334a9f9f28d17f0d0f700ab3>,rdf:first,fca:Divorced
+fca:PublicOrderCrime,owl:disjointWith,fca:DrugOffense
 fca:hasFact,rdfs:range,fca:Fact
-<nb33b8140955b4502af2a4a5b66ec3e8db8>,rdf:first,fca:Felony
+<n4256a20531334a9f9f28d17f0d0f700ab8>,rdf:first,fca:Felony
 fca:currencyCode,rdfs:domain,fca:Fine
-fca:monetaryAmount,rdfs:domain,fca:Fine
+<n4256a20531334a9f9f28d17f0d0f700ab12>,rdf:first,fca:FirstInstance
 fca:CivilRightsIneligibility,rdfs:subClassOf,fca:IneligibilityPunishment
 fca:ElectoralIneligibility,rdfs:subClassOf,fca:IneligibilityPunishment
 fca:ProfessionalIneligibility,rdfs:subClassOf,fca:IneligibilityPunishment
 fca:ineligibilityDuration,rdfs:domain,fca:IneligibilityPunishment
+fca:hasJudgment,rdfs:range,fca:Judgement
+fca:hasJudgmentDate,rdfs:domain,fca:Judgement
+fca:hasModificationDate,rdfs:domain,fca:Judgement
+fca:hasVersion,rdfs:domain,fca:Judgement
 fca:heardAt,rdfs:domain,fca:Judgement
 fca:isAssociatedWith,rdfs:domain,fca:Judgement
+fca:hasJurisdictionalLevel,rdfs:range,fca:JurisdictionalLevel
+fca:isPersonOrOrganization,rdfs:domain,fca:Lawyer
+fca:isRepresentedBy,rdfs:range,fca:Lawyer
+fca:leadsCase,rdfs:domain,fca:Lawyer
+fca:participatesIn,rdfs:domain,fca:Lawyer
+fca:represents,rdfs:domain,fca:Lawyer
+fca:representsCase,rdfs:domain,fca:Lawyer
+fca:LegalArticle,rdfs:subClassOf,fca:LegalBasis
+fca:citedInCase,rdfs:domain,fca:LegalBasis
+fca:referencesLegalBasis,rdfs:range,fca:LegalBasis
 fca:Divorced,rdf:type,fca:MaritalStatus
 fca:Married,rdf:type,fca:MaritalStatus
 fca:Pacs,rdf:type,fca:MaritalStatus
 fca:Single,rdf:type,fca:MaritalStatus
 fca:Widowed,rdf:type,fca:MaritalStatus
 fca:hasMaritalStatus,rdfs:range,fca:MaritalStatus
-<nb33b8140955b4502af2a4a5b66ec3e8db2>,rdf:first,fca:Married
-<nb33b8140955b4502af2a4a5b66ec3e8db7>,rdf:first,fca:Misdemeanor
+<n4256a20531334a9f9f28d17f0d0f700ab2>,rdf:first,fca:Married
+<n4256a20531334a9f9f28d17f0d0f700ab7>,rdf:first,fca:Misdemeanor
 fca:Fine,rdfs:subClassOf,fca:MonetaryPunishment
 fca:monetaryAmount,rdfs:domain,fca:MonetaryPunishment
 fca:CustodialPunishment,owl:disjointWith,fca:NonCustodialPunishment
@@ -232,8 +378,9 @@ fca:PublicOrderCrime,rdfs:subClassOf,fca:OffenseType
 fca:ViolentOffense,rdfs:subClassOf,fca:OffenseType
 fca:WhiteCollarOffense,rdfs:subClassOf,fca:OffenseType
 fca:hasOffenseType,rdfs:range,fca:OffenseType
-<nb33b8140955b4502af2a4a5b66ec3e8db4>,rdf:first,fca:Pacs
+<n4256a20531334a9f9f28d17f0d0f700ab4>,rdf:first,fca:Pacs
 fca:Burglary,rdfs:subClassOf,fca:PropertyOffense
+fca:CyberCrime,owl:disjointWith,fca:PropertyOffense
 fca:Theft,rdfs:subClassOf,fca:PropertyOffense
 fca:Vandalism,rdfs:subClassOf,fca:PropertyOffense
 fca:Disorderly_Conduct,rdfs:subClassOf,fca:PublicOrderCrime
@@ -247,60 +394,104 @@ fca:NoResource,rdfs:subClassOf,fca:Resource
 fca:RealEstate,rdfs:subClassOf,fca:Resource
 fca:possessesResource,rdfs:range,fca:Resource
 fca:Convict,rdfs:subClassOf,fca:Role
+fca:Lawyer,rdfs:subClassOf,fca:Role
+fca:PublicProsecutor,rdfs:subClassOf,fca:Role
 fca:Suspect,rdfs:subClassOf,fca:Role
 fca:Victim,rdfs:subClassOf,fca:Role
 fca:hasRole,rdfs:range,fca:Role
 fca:Felony,rdf:type,fca:SeverityLevel
 fca:Misdemeanor,rdf:type,fca:SeverityLevel
 fca:hasSeverity,rdfs:range,fca:SeverityLevel
-<nb33b8140955b4502af2a4a5b66ec3e8db1>,rdf:first,fca:Single
+<n4256a20531334a9f9f28d17f0d0f700ab1>,rdf:first,fca:Single
+<n4256a20531334a9f9f28d17f0d0f700ab18>,rdf:first,fca:SocialChamber
+fca:Cassation,fca:hasChamberType,fca:SocialChamber
 fca:Victim,owl:disjointWith,fca:Suspect
 fca:challenges,rdfs:range,fca:Trial
+fca:isChallengedBy,rdfs:domain,fca:Trial
 fca:Assault,rdfs:subClassOf,fca:ViolentOffense
 fca:Homicide,rdfs:subClassOf,fca:ViolentOffense
 fca:Robbery,rdfs:subClassOf,fca:ViolentOffense
 fca:Embezzlement,rdfs:subClassOf,fca:WhiteCollarOffense
 fca:Fraud,rdfs:subClassOf,fca:WhiteCollarOffense
 fca:MoneyLaundering,rdfs:subClassOf,fca:WhiteCollarOffense
-<nb33b8140955b4502af2a4a5b66ec3e8db5>,rdf:first,fca:Widowed
-<nb33b8140955b4502af2a4a5b66ec3e8db6>,owl:onProperty,fca:hasConviction
-fca:Convict,rdf:type,owl:Class
+fca:ViolentOffense,owl:disjointWith,fca:WhiteCollarOffense
+<n4256a20531334a9f9f28d17f0d0f700ab5>,rdf:first,fca:Widowed
+fca:isChallengedBy,owl:inverseOf,fca:challenges
+<n4256a20531334a9f9f28d17f0d0f700ab6>,owl:onProperty,fca:hasConviction
+<n4256a20531334a9f9f28d17f0d0f700ab9>,owl:onProperty,fca:hasJudgment
+fca:citedInCase,owl:inverseOf,fca:referencesLegalBasis
+fca:isRepresentedBy,owl:inverseOf,fca:represents
+fca:citedInCase,rdf:type,owl:ObjectProperty
+fca:hasChamberType,rdf:type,owl:ObjectProperty
+fca:referencesLegalBasis,rdf:type,owl:ObjectProperty
 <https://growgraph.dev/fcaont#>,rdf:type,owl:Ontology
-<nb33b8140955b4502af2a4a5b66ec3e8db6>,rdf:type,owl:Restriction
+<n4256a20531334a9f9f28d17f0d0f700ab6>,rdf:type,owl:Restriction
+<n4256a20531334a9f9f28d17f0d0f700ab9>,rdf:type,owl:Restriction
 fca:appealsTo,rdf:type,rdf:Property
 fca:challenges,rdf:type,rdf:Property
 fca:concerns,rdf:type,rdf:Property
 fca:contains,rdf:type,rdf:Property
 fca:currencyCode,rdf:type,rdf:Property
+fca:hasAppealDeadline,rdf:type,rdf:Property
+fca:hasAppealDecision,rdf:type,rdf:Property
+fca:hasAppealId,rdf:type,rdf:Property
 fca:hasChildren,rdf:type,rdf:Property
 fca:hasConviction,rdf:type,rdf:Property
 fca:hasDuration,rdf:type,rdf:Property
 fca:hasFact,rdf:type,rdf:Property
+fca:hasJudgment,rdf:type,rdf:Property
+fca:hasJudgmentDate,rdf:type,rdf:Property
+fca:hasJurisdictionalLevel,rdf:type,rdf:Property
 fca:hasMaritalStatus,rdf:type,rdf:Property
+fca:hasModificationDate,rdf:type,rdf:Property
 fca:hasOffenseType,rdf:type,rdf:Property
 fca:hasParticipant,rdf:type,rdf:Property
 fca:hasProfession,rdf:type,rdf:Property
 fca:hasPunishment,rdf:type,rdf:Property
 fca:hasRole,rdf:type,rdf:Property
 fca:hasSeverity,rdf:type,rdf:Property
+fca:hasVersion,rdf:type,rdf:Property
 fca:heardAt,rdf:type,rdf:Property
 fca:ineligibilityDuration,rdf:type,rdf:Property
 fca:initiates,rdf:type,rdf:Property
 fca:isAssociatedWith,rdf:type,rdf:Property
+fca:isChallengedBy,rdf:type,rdf:Property
+fca:isPersonOrOrganization,rdf:type,rdf:Property
+fca:isRepresentedBy,rdf:type,rdf:Property
 fca:issues,rdf:type,rdf:Property
 fca:knows,rdf:type,rdf:Property
+fca:leadsCase,rdf:type,rdf:Property
 fca:leadsTo,rdf:type,rdf:Property
 fca:monetaryAmount,rdf:type,rdf:Property
+fca:participatesIn,rdf:type,rdf:Property
 fca:possessesResource,rdf:type,rdf:Property
 fca:prosecutes,rdf:type,rdf:Property
+fca:represents,rdf:type,rdf:Property
+fca:representsCase,rdf:type,rdf:Property
 fca:residesAt,rdf:type,rdf:Property
 fca:takesPlaceAt,rdf:type,rdf:Property
 fca:takesPlaceOn,rdf:type,rdf:Property
-<nb33b8140955b4502af2a4a5b66ec3e8db5>,rdf:rest,rdf:nil
-<nb33b8140955b4502af2a4a5b66ec3e8db8>,rdf:rest,rdf:nil
+<n4256a20531334a9f9f28d17f0d0f700ab11>,rdf:rest,rdf:nil
+<n4256a20531334a9f9f28d17f0d0f700ab14>,rdf:rest,rdf:nil
+<n4256a20531334a9f9f28d17f0d0f700ab18>,rdf:rest,rdf:nil
+<n4256a20531334a9f9f28d17f0d0f700ab5>,rdf:rest,rdf:nil
+<n4256a20531334a9f9f28d17f0d0f700ab8>,rdf:rest,rdf:nil
 fca:Appeal,rdf:type,rdfs:Class
+fca:AppealCassation,rdf:type,rdfs:Class
+fca:AppealCassationPartial,rdf:type,rdfs:Class
+fca:AppealCassationPartialWithRejection,rdf:type,rdfs:Class
+fca:AppealCassationPartialWithoutReferral,rdf:type,rdfs:Class
+fca:AppealCassationWithoutReferral,rdf:type,rdfs:Class
+fca:AppealDecision,rdf:type,rdfs:Class
+fca:AppealGround,rdf:type,rdfs:Class
+fca:AppealModified,rdf:type,rdfs:Class
+fca:AppealPartiallyUpheld,rdf:type,rdfs:Class
+fca:AppealRejected,rdf:type,rdfs:Class
+fca:AppealUpheld,rdf:type,rdfs:Class
 fca:Assault,rdf:type,rdfs:Class
 fca:Burglary,rdf:type,rdfs:Class
+fca:Case,rdf:type,rdfs:Class
+fca:ChamberType,rdf:type,rdfs:Class
 fca:CivilRightsIneligibility,rdf:type,rdfs:Class
 fca:Convict,rdf:type,rdfs:Class
 fca:Conviction,rdf:type,rdfs:Class
@@ -319,6 +510,10 @@ fca:Homicide,rdf:type,rdfs:Class
 fca:Imprisonment,rdf:type,rdfs:Class
 fca:IneligibilityPunishment,rdf:type,rdfs:Class
 fca:Judgement,rdf:type,rdfs:Class
+fca:JurisdictionalLevel,rdf:type,rdfs:Class
+fca:Lawyer,rdf:type,rdfs:Class
+fca:LegalArticle,rdf:type,rdfs:Class
+fca:LegalBasis,rdf:type,rdfs:Class
 fca:MaritalStatus,rdf:type,rdfs:Class
 fca:MonetaryFund,rdf:type,rdfs:Class
 fca:MonetaryPunishment,rdf:type,rdfs:Class
@@ -333,8 +528,10 @@ fca:ProfessionalIneligibility,rdf:type,rdfs:Class
 fca:PropertyOffense,rdf:type,rdfs:Class
 fca:PublicIntoxication,rdf:type,rdfs:Class
 fca:PublicOrderCrime,rdf:type,rdfs:Class
+fca:PublicProsecutor,rdf:type,rdfs:Class
 fca:Punishment,rdf:type,rdfs:Class
 fca:RealEstate,rdf:type,rdfs:Class
+fca:ReferralCourt,rdf:type,rdfs:Class
 fca:Resource,rdf:type,rdfs:Class
 fca:Robbery,rdf:type,rdfs:Class
 fca:Role,rdf:type,rdfs:Class
@@ -349,6 +546,7 @@ fca:WhiteCollarOffense,rdf:type,rdfs:Class
 schema:Event,rdf:type,rdfs:Class
 schema:Organization,rdf:type,rdfs:Class
 schema:Person,rdf:type,rdfs:Class
+fca:isPersonOrOrganization,rdfs:range,rdfs:Resource
 fca:takesPlaceOn,rdfs:range,schema:Date
 fca:Appeal,rdfs:subClassOf,schema:Event
 fca:Judgement,rdfs:subClassOf,schema:Event
@@ -367,13 +565,11 @@ fca:leadsTo,rdfs:range,schema:Event
 fca:prosecutes,rdfs:range,schema:Event
 fca:takesPlaceAt,rdfs:domain,schema:Event
 fca:takesPlaceOn,rdfs:domain,schema:Event
-fca:hasChildren,rdfs:range,schema:Number
 fca:hasProfession,rdfs:range,schema:Occupation
+<n4256a20531334a9f9f28d17f0d0f700ab11>,rdf:first,schema:Organization
 fca:Court,rdfs:subClassOf,schema:Organization
 fca:issues,rdfs:domain,schema:Organization
-fca:Convict,rdfs:subClassOf,schema:Person
-fca:Suspect,rdfs:subClassOf,schema:Person
-fca:Victim,rdfs:subClassOf,schema:Person
+<n4256a20531334a9f9f28d17f0d0f700ab10>,rdf:first,schema:Person
 fca:hasChildren,rdfs:domain,schema:Person
 fca:hasConviction,rdfs:domain,schema:Person
 fca:hasMaritalStatus,rdfs:domain,schema:Person
@@ -388,7 +584,13 @@ fca:prosecutes,rdfs:domain,schema:Person
 fca:residesAt,rdfs:domain,schema:Person
 fca:residesAt,rdfs:range,schema:Place
 fca:takesPlaceAt,rdfs:range,schema:Place
+fca:hasAppealDeadline,rdfs:range,xsd:date
+fca:hasJudgmentDate,rdfs:range,xsd:date
+fca:hasModificationDate,rdfs:range,xsd:dateTime
 fca:monetaryAmount,rdfs:range,xsd:decimal
 fca:hasDuration,rdfs:range,xsd:duration
 fca:ineligibilityDuration,rdfs:range,xsd:duration
+fca:hasChildren,rdfs:range,xsd:nonNegativeInteger
 fca:currencyCode,rdfs:range,xsd:string
+fca:hasAppealId,rdfs:range,xsd:string
+fca:hasVersion,rdfs:range,xsd:string

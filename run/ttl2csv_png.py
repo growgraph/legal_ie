@@ -32,7 +32,12 @@ def proc(ttl_fname, plot):
         mask_trivial = df.predicate.isin(
             ["rdfs:label", "rdfs:comment"]
         ) | df.object.isin(["rdf:Property", "rdfs:Class"])
-        df_reduced = df.loc[~mask_trivial]
+        mask_o = df.object.apply(lambda x: x[0] == "<" and x[-1] == ">" and len(x) > 20)
+        mask_s = df.subject.apply(
+            lambda x: x[0] == "<" and x[-1] == ">" and len(x) > 20
+        )
+
+        df_reduced = df.loc[~mask_trivial & (~mask_o & ~mask_s)].copy()
 
         visualize_nx(
             df_reduced, ".".join(ttl_fname.split(".")[:-1] + ["nx.png"]), scale=1.1

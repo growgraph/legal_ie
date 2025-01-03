@@ -9,7 +9,6 @@
 
 <https://growgraph.dev/fcaont#> a owl:Ontology ;
     rdfs:label "French (Supreme) Court of Appeal Ontology" ;
-    dcterms:creator "Alexander Belikov" ;
     dcterms:created "2024-12-18" ;
     owl:versionInfo "3.0" ;
     dcterms:license "https://creativecommons.org/licenses/by/4.0/" .
@@ -39,21 +38,6 @@ fca:hasOffenseType a rdf:Property ;
 fca:Fact a rdfs:Class ;
     rdfs:label "Fact" ;
     rdfs:comment "A fact related to an event or offence in criminal cases." .
-
-fca:Victim a rdfs:Class ;
-    rdfs:label "Victim" ;
-    rdfs:comment "The individual or entity harmed by a criminal act." ;
-    rdfs:subClassOf schema:Person .
-
-fca:Suspect a rdfs:Class ;
-    rdfs:label "Suspect" ;
-    rdfs:comment "Individual believed to have committed an offence." ;
-    rdfs:subClassOf schema:Person .
-
-fca:Convict a rdfs:Class ;
-    rdfs:label "Convict" ;
-    rdfs:comment "Individual found guilty of an offence." ;
-    rdfs:subClassOf schema:Person .
 
 # Properties
 
@@ -172,7 +156,7 @@ fca:knows a rdf:Property ;
 fca:hasChildren a rdf:Property ;
     rdfs:label "hasChildren" ;
     rdfs:domain schema:Person ;
-    rdfs:range schema:Number ;
+    rdfs:range xsd:nonNegativeInteger ;
     rdfs:comment "Specifies the number of children a person has." .
 
 # Property for resources
@@ -228,11 +212,13 @@ fca:Suspect a rdfs:Class ;
 
 fca:Convict a rdfs:Class ;
     rdfs:subClassOf fca:Role ;
+    owl:equivalentClass [
+        a owl:Restriction ;
+        owl:onProperty fca:hasConviction ;
+        owl:minCardinality 1
+    ] ;
     rdfs:label "Convict" ;
-    rdfs:comment "A person who has been found guilty of a crime." .
-
-# Events and Procedures
-schema:Event a rdfs:Class .
+    rdfs:comment "A person who has at least one conviction." .
 
 fca:Judgement a rdfs:Class ;
     rdfs:subClassOf schema:Event ;
@@ -265,9 +251,20 @@ fca:hasAppealId a rdf:Property ;
 
 fca:Court a rdfs:Class ;
     rdfs:subClassOf schema:Organization ;
-    rdfs:label "Judgement Court" ;
-    rdfs:comment "A court where judgements and appeals are made." .
+    rdfs:comment "A legal body that makes decisions in legal cases (judgements, appeals, etc)." ;
+    rdfs:label "Court"@en, "Cour"@fr .
 
+fca:FirstInstance a fca:Court ;
+    rdfs:label "First Instance Court"@en, "Tribunal de première instance"@fr ;
+    rdfs:comment "Court that hears a case for the first time." .
+
+fca:Cassation a fca:Court ;
+    rdfs:label "Court of Cassation"@en, "Cour de cassation"@fr ;
+    rdfs:comment "Supreme court of the French judicial system." ;
+    fca:hasChamberType fca:CriminalChamber,
+                       fca:CivilChamber,
+                       fca:CommercialChamber,
+                       fca:SocialChamber .
 
 fca:challenges a rdf:Property ;
     rdfs:label "challenges" ;
@@ -310,12 +307,6 @@ fca:Fine a rdfs:Class ;
     rdfs:subClassOf fca:MonetaryPunishment ;
     rdfs:label "Fine" ;
     rdfs:comment "Monetary penalty imposed as punishment." .
-
-fca:monetaryAmount a rdf:Property ;
-    rdfs:label "monetary Amount" ;
-    rdfs:domain fca:Fine ;
-    rdfs:range xsd:decimal ;
-    rdfs:comment "The numerical amount of the financial penalty" .
 
 fca:currencyCode a rdf:Property ;
     rdfs:label "Currency Code" ;
@@ -401,18 +392,6 @@ fca:appealsTo a rdf:Property ;
 
 fca:CustodialPunishment owl:disjointWith fca:NonCustodialPunishment .
 fca:Victim owl:disjointWith fca:Suspect .
-
-
-fca:Convict a owl:Class ;
-    owl:equivalentClass [
-        a owl:Restriction ;
-        owl:onProperty fca:hasConviction ;
-        owl:minCardinality 1
-    ] ;
-    rdfs:label "Convict" ;
-    rdfs:comment "A person who has at least one conviction." .
-
-
 
 fca:OffenseType a rdfs:Class ;
     rdfs:label "Offense Type" ;
@@ -537,3 +516,227 @@ fca:Misdemeanor a fca:SeverityLevel ;
 fca:Felony a fca:SeverityLevel ;
     rdfs:label "Felony" ;
     rdfs:comment "A more serious criminal offense." .
+
+
+# Lawyer Representation
+fca:Lawyer a rdfs:Class ;
+    rdfs:label "Lawyer"@en ;
+    rdfs:comment "A class representing a lawyer, who may be an individual or an organization."@en .
+
+fca:representsCase a rdf:Property ;
+    rdfs:domain fca:Lawyer ;
+    rdfs:range fca:Case ;
+    rdfs:label "represents case"@en ;
+    rdfs:comment "Relates a lawyer to the case they are representing."@en .
+
+fca:leadsCase a rdf:Property ;
+    rdfs:domain fca:Lawyer ;
+    rdfs:range fca:Case ;
+    rdfs:label "leads case"@en ;
+    rdfs:comment "Indicates the lawyer leading a specific case."@en .
+
+fca:Case a rdfs:Class ;
+    rdfs:label "Case"@en ;
+    rdfs:comment "A class representing a legal case."@en ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty fca:hasJudgment ;
+        owl:maxCardinality 1
+    ] .
+
+
+fca:Lawyer a rdfs:Class ;
+    rdfs:subClassOf fca:Role ;
+    rdfs:label "Lawyer" ;
+    rdfs:comment "A person or organization representing a party in a legal case." .
+
+fca:represents a rdf:Property ;
+    rdfs:label "represents" ;
+    rdfs:comment "Indicates that a lawyer represents a party in a legal case or appeal." ;
+    rdfs:domain fca:Lawyer ;
+    rdfs:range fca:Case .
+
+fca:participatesIn a rdf:Property ;
+    rdfs:label "participates In" ;
+    rdfs:comment "Indicates a lawyer’s participation in an appeal." ;
+    rdfs:domain fca:Lawyer ;
+    rdfs:range fca:Appeal .
+
+# Lawyer as Person or Organization
+fca:isPersonOrOrganization a rdf:Property ;
+    rdfs:label "is Person or Organization" ;
+    rdfs:comment "Specifies whether a lawyer is a person or an organization." ;
+    rdfs:domain fca:Lawyer ;
+    rdfs:range rdfs:Resource ;
+    owl:unionOf (schema:Person schema:Organization) .
+
+
+# Appeal Decision Class Hierarchy
+fca:AppealDecision a rdfs:Class ;
+    rdfs:label "Appeal Decision"@en ;
+    rdfs:comment "A class representing the decision outcome of an appeal."@en .
+
+fca:AppealRejected a rdfs:Class ;
+    rdfs:subClassOf fca:AppealDecision ;
+    rdfs:label "Appeal Rejected"@en ;
+    rdfs:comment "Indicates that the appeal was rejected by the court."@en .
+
+fca:AppealUpheld a rdfs:Class ;
+    rdfs:subClassOf fca:AppealDecision ;
+    rdfs:label "Appeal Upheld"@en ;
+    rdfs:comment "Indicates that the appeal was fully upheld, overturning the original decision."@en .
+
+fca:AppealPartiallyUpheld a rdfs:Class ;
+    rdfs:subClassOf fca:AppealDecision ;
+    rdfs:label "Appeal Partially Upheld"@en ;
+    rdfs:comment "Indicates that the appeal was partially upheld, modifying part of the original decision."@en .
+
+fca:AppealModified a rdfs:Class ;
+    rdfs:subClassOf fca:AppealDecision ;
+    rdfs:label "Appeal Modified"@en ;
+    rdfs:comment "Indicates that the decision was modified without fully upholding the appeal."@en .
+
+# Specific Appeal Decisions
+fca:AppealCassation a rdfs:Class ;
+    rdfs:subClassOf fca:AppealUpheld ;
+    rdfs:label "Cassation"@en ;
+    rdfs:comment "The original decision is overturned by cassation."@en .
+
+fca:AppealCassationPartial a rdfs:Class ;
+    rdfs:subClassOf fca:AppealPartiallyUpheld ;
+    rdfs:label "Partial Cassation"@en ;
+    rdfs:comment "A cassation that partially overturns the original decision."@en .
+
+fca:AppealCassationWithoutReferral a rdfs:Class ;
+    rdfs:subClassOf fca:AppealModified ;
+    rdfs:label "Cassation Without Referral"@en ;
+    rdfs:comment "The decision is modified by cassation without referring the case to a lower court."@en .
+
+fca:AppealCassationPartialWithoutReferral a rdfs:Class ;
+    rdfs:subClassOf fca:AppealCassationPartial ;
+    rdfs:label "Partial Cassation Without Referral"@en ;
+    rdfs:comment "A partial cassation that does not involve a referral to a lower court."@en .
+
+fca:AppealCassationPartialWithRejection a rdfs:Class ;
+    rdfs:subClassOf fca:AppealPartiallyUpheld, fca:AppealRejected ;
+    rdfs:label "Partial Cassation with Rejection"@en ;
+    rdfs:comment "A partial cassation where some parts are upheld and others are rejected."@en .
+
+# Relation to Cases
+fca:hasAppealDecision a rdf:Property ;
+    rdfs:domain fca:Case ;
+    rdfs:range fca:AppealDecision ;
+    rdfs:label "has appeal decision"@en ;
+    rdfs:comment "Relates a case to its appeal decision."@en .
+
+
+fca:LegalBasis a rdfs:Class ;
+    rdfs:label "Legal Basis"@fr, "Base légale"@fr ;
+    rdfs:comment "Legal references and articles used in court decisions." .
+
+fca:LegalArticle a rdfs:Class ;
+    rdfs:subClassOf fca:LegalBasis ;
+    rdfs:label "Legal Article"@en, "Article de loi"@fr .
+
+# Properties for linking Legal Basis to Cases
+fca:referencesLegalBasis a owl:ObjectProperty ;
+    rdfs:domain fca:Case ;
+    rdfs:range fca:LegalBasis ;
+    rdfs:label "references Legal Basis"@en, "réfère à une base légale"@fr ;
+    rdfs:comment "Links a case to the legal basis it references." .
+
+fca:citedInCase a owl:ObjectProperty ;
+    owl:inverseOf fca:referencesLegalBasis ;
+    rdfs:domain fca:LegalBasis ;
+    rdfs:range fca:Case ;
+    rdfs:label "cited in Case"@en, "cité dans un cas"@fr ;
+    rdfs:comment "Inverse property to link a legal basis to cases where it is cited." .
+
+fca:AppealGround a rdfs:Class ;
+    rdfs:label "Appeal Ground"@en, "Moyen de cassation"@fr ;
+    rdfs:comment "Specific reasons for appealing a court decision." .
+
+fca:ReferralCourt a rdfs:Class ;
+    rdfs:subClassOf fca:Court ;
+    rdfs:label "Referral Court"@en, "Cour de renvoi"@fr .
+
+fca:PublicProsecutor a rdfs:Class ;
+    rdfs:subClassOf fca:Role ;
+    rdfs:label "Public Prosecutor"@en, "Ministère public"@fr .
+
+fca:hasAppealDeadline a rdf:Property ;
+    rdfs:domain fca:Appeal ;
+    rdfs:range xsd:date ;
+    rdfs:label "Appeal Deadline"@en, "Délai de recours"@fr .
+
+fca:hasJudgmentDate a rdf:Property ;
+    rdfs:domain fca:Judgement ;
+    rdfs:range xsd:date .
+
+fca:JurisdictionalLevel a rdfs:Class ;
+    owl:oneOf (fca:FirstInstance fca:Appeal fca:Cassation) .
+
+fca:hasJurisdictionalLevel a rdf:Property ;
+    rdfs:domain fca:Court ;
+    rdfs:range fca:JurisdictionalLevel .
+
+fca:isRepresentedBy a rdf:Property ;
+    owl:inverseOf fca:represents ;
+    rdfs:domain fca:Case ;
+    rdfs:range fca:Lawyer .
+
+fca:isChallengedBy a rdf:Property ;
+    owl:inverseOf fca:challenges ;
+    rdfs:domain fca:Trial ;
+    rdfs:range fca:Appeal .
+
+
+fca:hasJudgment a rdf:Property ;
+    rdfs:label "has Judgment"@en ;
+    rdfs:domain fca:Case ;
+    rdfs:range fca:Judgement ;
+    rdfs:comment "Associates a case with its judgment." .
+
+
+fca:ViolentOffense owl:disjointWith fca:WhiteCollarOffense .
+fca:CyberCrime owl:disjointWith fca:PropertyOffense .
+fca:PublicOrderCrime owl:disjointWith fca:DrugOffense .
+
+
+fca:hasVersion a rdf:Property ;
+    rdfs:domain fca:Judgement ;
+    rdfs:range xsd:string .
+
+fca:hasModificationDate a rdf:Property ;
+    rdfs:domain fca:Judgement ;
+    rdfs:range xsd:dateTime .
+
+
+fca:ChamberType a rdfs:Class ;
+    rdfs:label "Chamber Type"@en, "Type de chambre"@fr ;
+    owl:oneOf (fca:CriminalChamber fca:CivilChamber fca:CommercialChamber fca:SocialChamber) .
+
+fca:CriminalChamber a fca:ChamberType ;
+    rdfs:label "Criminal Chamber"@en, "Chambre criminelle"@fr .
+
+
+fca:CommercialChamber a fca:ChamberType ;
+    rdfs:label "Commercial Chamber"@en, "Chambre commerciale"@fr ;
+    rdfs:comment "Chamber handling business and commercial law cases." .
+
+fca:SocialChamber a fca:ChamberType ;
+    rdfs:label "Social Chamber"@en, "Chambre sociale"@fr ;
+    rdfs:comment "Chamber handling labor and social security cases." .
+
+
+fca:CivilChamber a fca:ChamberType ;
+    rdfs:label "Civil Chamber"@en, "Chambre civile"@fr ;
+    rdfs:comment "Chamber handling civil law cases." .
+
+
+fca:hasChamberType a owl:ObjectProperty ;
+    rdfs:domain fca:Court ;
+    rdfs:range fca:ChamberType ;
+    rdfs:label "has Chamber Type"@en, "a pour type de chambre"@fr ;
+    rdfs:comment "Property linking a court to its chamber type(s)." .
+

@@ -100,3 +100,25 @@ def render_response(onto_str: str, text: str, llm):
 
     response = chain.invoke({"ontology": onto_str, "input_text": text})
     return response
+
+
+def replace_namespaces(g, current_ns, new_ns):
+    # SPARQL Update query to replace the namespace
+    query = f"""
+        DELETE {{
+            ?s ?p ?o
+        }}
+        INSERT {{
+            ?s_new ?p_new ?o_new
+        }}
+        WHERE {{
+            ?s ?p ?o .
+            BIND(IF(ISIRI(?s), IRI(REPLACE(STR(?s), "^{current_ns}", "{new_ns}")), ?s) AS ?s_new)
+            BIND(IF(ISIRI(?p), IRI(REPLACE(STR(?p), "^{current_ns}", "{new_ns}")), ?p) AS ?p_new)
+            BIND(IF(ISIRI(?o), IRI(REPLACE(STR(?o), "^{current_ns}", "{new_ns}")), ?o) AS ?o_new)
+        }}
+    """
+
+    g.update(query)
+
+    return g
