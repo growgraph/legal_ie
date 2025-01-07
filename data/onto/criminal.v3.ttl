@@ -14,7 +14,6 @@
     dcterms:license "https://creativecommons.org/licenses/by/4.0/" .
 
 
-# Classes
 schema:Event a rdfs:Class .
 schema:Person a rdfs:Class .
 schema:Organization a rdfs:Class .
@@ -39,7 +38,6 @@ fca:Fact a rdfs:Class ;
     rdfs:label "Fact" ;
     rdfs:comment "A fact related to an event or offence in criminal cases." .
 
-# Properties
 
 fca:issues a rdf:Property ;
     rdfs:label "issues" ;
@@ -153,25 +151,30 @@ fca:knows a rdf:Property ;
     rdfs:range schema:Person ;
     rdfs:comment "Indicates acquaintance or relation between two persons." .
 
+
+fca:Age a rdf:Property ;
+    rdfs:domain schema:Person ;
+    rdfs:range xsd:nonNegativeInteger ;
+    rdfs:label "age" ;
+    rdfs:comment "The age of a person in years. Must be a non-negative integer." ;
+    schema:unitCode "ANN"^^xsd:string .
+
 fca:hasChildren a rdf:Property ;
     rdfs:label "hasChildren" ;
     rdfs:domain schema:Person ;
     rdfs:range xsd:nonNegativeInteger ;
     rdfs:comment "Specifies the number of children a person has." .
 
-# Property for resources
 fca:possessesResource a rdf:Property ;
     rdfs:label "possesses Resource" ;
     rdfs:domain schema:Person ;
     rdfs:range fca:Resource ;
     rdfs:comment "Indicates a resource or asset possessed by a person." .
 
-# Resource superclass
 fca:Resource a rdfs:Class ;
     rdfs:label "Resource" ;
     rdfs:comment "An asset or resource associated with a person." .
 
-# Subclasses of Resource
 fca:MonetaryFund a rdfs:Class ;
     rdfs:subClassOf fca:Resource ;
     rdfs:label "Monetary Fund" ;
@@ -194,12 +197,10 @@ fca:hasRole a rdf:Property ;
     rdfs:label "has role" ;
     rdfs:comment "Associates a person with a role they play in a specific context." .
 
-# Define the Role class
 fca:Role a rdfs:Class ;
     rdfs:label "Role" ;
     rdfs:comment "A role that a person can have in a specific context." .
 
-# Define specific roles as subclasses of Role
 fca:Victim a rdfs:Class ;
     rdfs:subClassOf fca:Role ;
     rdfs:label "Victim" ;
@@ -273,7 +274,6 @@ fca:challenges a rdf:Property ;
     rdfs:comment "Indicates the trial being challenged by an appeal." .
 
 
-# Punishment Ontology
 fca:Punishment a rdfs:Class ;
     rdfs:label "Punishment" ;
     rdfs:comment "Abstract base class for all types of legal punishments, imposed on a person as a result of a conviction." .
@@ -289,7 +289,7 @@ fca:NonCustodialPunishment a rdfs:Class ;
     rdfs:comment "Punishments that do not involve direct confinement." .
 
 fca:MonetaryPunishment a rdfs:Class ;
-    rdfs:subClassOf fca:Punishment ;
+    rdfs:subClassOf fca:NonCustodialPunishment ;
     rdfs:label "Monetary Punishment" ;
     rdfs:comment "Punishments involving financial penalties." .
 
@@ -336,9 +336,6 @@ fca:ElectoralIneligibility a rdfs:Class ;
     rdfs:label "Electoral Ineligibility" ;
     rdfs:comment "Punishment restricting voting or running for public office." .
 
-### Properties
-
-# Event properties
 fca:takesPlaceAt a rdf:Property ;
     rdfs:label "takesPlaceAt" ;
     rdfs:domain schema:Event ;
@@ -351,7 +348,6 @@ fca:hasParticipant a rdf:Property ;
     rdfs:range schema:Person ;
     rdfs:comment "Defines a participant in an event." .
 
-# Punishment properties
 fca:hasDuration a rdf:Property ;
     rdfs:label "has Duration" ;
     rdfs:domain fca:CustodialPunishment ;
@@ -379,9 +375,10 @@ fca:isAssociatedWith a rdf:Property ;
 
 fca:heardAt a rdf:Property ;
     rdfs:label "heardAt" ;
-    rdfs:domain fca:Judgement ;
+    rdfs:domain fca:Case ;
     rdfs:range fca:Court ;
     rdfs:comment "Specifies the court where the judgement was made." .
+
 
 fca:appealsTo a rdf:Property ;
     rdfs:label "appealsTo" ;
@@ -443,7 +440,6 @@ fca:Robbery a rdfs:Class ;
     rdfs:label "Robbery" ;
     rdfs:comment "Theft involving direct confrontation or threat of violence" .
 
-# Property Crimes
 fca:Theft a rdfs:Class ;
     rdfs:subClassOf fca:PropertyOffense ;
     rdfs:label "Theft" ;
@@ -459,7 +455,6 @@ fca:Vandalism a rdfs:Class ;
     rdfs:label "Vandalism" ;
     rdfs:comment "Deliberate destruction or damage to property" .
 
-# White Collar Crimes
 fca:Fraud a rdfs:Class ;
     rdfs:subClassOf fca:WhiteCollarOffense ;
     rdfs:label "Fraud" ;
@@ -475,7 +470,6 @@ fca:MoneyLaundering a rdfs:Class ;
     rdfs:label "Money Laundering" ;
     rdfs:comment "Concealing the origins of illegally obtained money" .
 
-# Cyber Crimes
 fca:Hacking a rdfs:Class ;
     rdfs:subClassOf fca:CyberCrime ;
     rdfs:label "Hacking" ;
@@ -486,7 +480,6 @@ fca:Phishing a rdfs:Class ;
     rdfs:label "Phishing" ;
     rdfs:comment "Fraudulent attempt to obtain sensitive information online" .
 
-# Public Order Crimes
 fca:PublicIntoxication a rdfs:Class ;
     rdfs:subClassOf fca:PublicOrderCrime ;
     rdfs:label "Public Intoxication" ;
@@ -518,17 +511,6 @@ fca:Felony a fca:SeverityLevel ;
     rdfs:comment "A more serious criminal offense." .
 
 
-# Lawyer Representation
-fca:Lawyer a rdfs:Class ;
-    rdfs:label "Lawyer"@en ;
-    rdfs:comment "A class representing a lawyer, who may be an individual or an organization."@en .
-
-fca:representsCase a rdf:Property ;
-    rdfs:domain fca:Lawyer ;
-    rdfs:range fca:Case ;
-    rdfs:label "represents case"@en ;
-    rdfs:comment "Relates a lawyer to the case they are representing."@en .
-
 fca:leadsCase a rdf:Property ;
     rdfs:domain fca:Lawyer ;
     rdfs:range fca:Case ;
@@ -544,7 +526,6 @@ fca:Case a rdfs:Class ;
         owl:maxCardinality 1
     ] .
 
-
 fca:Lawyer a rdfs:Class ;
     rdfs:subClassOf fca:Role ;
     rdfs:label "Lawyer" ;
@@ -554,7 +535,14 @@ fca:represents a rdf:Property ;
     rdfs:label "represents" ;
     rdfs:comment "Indicates that a lawyer represents a party in a legal case or appeal." ;
     rdfs:domain fca:Lawyer ;
-    rdfs:range fca:Case .
+    rdfs:range fca:Case ;
+    owl:inverseOf fca:isRepresentedBy .
+
+fca:isRepresentedBy a rdf:Property ;
+    rdfs:domain fca:Case ;
+    rdfs:range fca:Lawyer ;
+    rdfs:comment "Inverse of fca:represents. Indicates a client is represented by a lawyer." ;
+    owl:inverseOf fca:represents .
 
 fca:participatesIn a rdf:Property ;
     rdfs:label "participates In" ;
@@ -562,16 +550,14 @@ fca:participatesIn a rdf:Property ;
     rdfs:domain fca:Lawyer ;
     rdfs:range fca:Appeal .
 
-# Lawyer as Person or Organization
-fca:isPersonOrOrganization a rdf:Property ;
-    rdfs:label "is Person or Organization" ;
-    rdfs:comment "Specifies whether a lawyer is a person or an organization." ;
-    rdfs:domain fca:Lawyer ;
-    rdfs:range rdfs:Resource ;
+fca:PersonOrOrganization a owl:Class ;
     owl:unionOf (schema:Person schema:Organization) .
 
+fca:isPersonOrOrganization a owl:ObjectProperty ;
+    rdfs:domain fca:Lawyer ;
+    rdfs:range fca:PersonOrOrganization ;
+    rdfs:comment "Indicates that a Lawyer can be a Person or an Organization." .
 
-# Appeal Decision Class Hierarchy
 fca:AppealDecision a rdfs:Class ;
     rdfs:label "Appeal Decision"@en ;
     rdfs:comment "A class representing the decision outcome of an appeal."@en .
@@ -596,7 +582,6 @@ fca:AppealModified a rdfs:Class ;
     rdfs:label "Appeal Modified"@en ;
     rdfs:comment "Indicates that the decision was modified without fully upholding the appeal."@en .
 
-# Specific Appeal Decisions
 fca:AppealCassation a rdfs:Class ;
     rdfs:subClassOf fca:AppealUpheld ;
     rdfs:label "Cassation"@en ;
@@ -622,7 +607,6 @@ fca:AppealCassationPartialWithRejection a rdfs:Class ;
     rdfs:label "Partial Cassation with Rejection"@en ;
     rdfs:comment "A partial cassation where some parts are upheld and others are rejected."@en .
 
-# Relation to Cases
 fca:hasAppealDecision a rdf:Property ;
     rdfs:domain fca:Case ;
     rdfs:range fca:AppealDecision ;
@@ -638,7 +622,6 @@ fca:LegalArticle a rdfs:Class ;
     rdfs:subClassOf fca:LegalBasis ;
     rdfs:label "Legal Article"@en, "Article de loi"@fr .
 
-# Properties for linking Legal Basis to Cases
 fca:referencesLegalBasis a owl:ObjectProperty ;
     rdfs:domain fca:Case ;
     rdfs:range fca:LegalBasis ;
@@ -680,10 +663,6 @@ fca:hasJurisdictionalLevel a rdf:Property ;
     rdfs:domain fca:Court ;
     rdfs:range fca:JurisdictionalLevel .
 
-fca:isRepresentedBy a rdf:Property ;
-    owl:inverseOf fca:represents ;
-    rdfs:domain fca:Case ;
-    rdfs:range fca:Lawyer .
 
 fca:isChallengedBy a rdf:Property ;
     owl:inverseOf fca:challenges ;
@@ -698,18 +677,14 @@ fca:hasJudgment a rdf:Property ;
     rdfs:comment "Associates a case with its judgment." .
 
 
-fca:ViolentOffense owl:disjointWith fca:WhiteCollarOffense .
-fca:CyberCrime owl:disjointWith fca:PropertyOffense .
-fca:PublicOrderCrime owl:disjointWith fca:DrugOffense .
-
-
 fca:hasVersion a rdf:Property ;
     rdfs:domain fca:Judgement ;
     rdfs:range xsd:string .
 
 fca:hasModificationDate a rdf:Property ;
     rdfs:domain fca:Judgement ;
-    rdfs:range xsd:dateTime .
+    rdfs:range xsd:dateTime ;
+    rdfs:label "has been modified on date"@en .
 
 
 fca:ChamberType a rdfs:Class ;
@@ -739,4 +714,3 @@ fca:hasChamberType a owl:ObjectProperty ;
     rdfs:range fca:ChamberType ;
     rdfs:label "has Chamber Type"@en, "a pour type de chambre"@fr ;
     rdfs:comment "Property linking a court to its chamber type(s)." .
-

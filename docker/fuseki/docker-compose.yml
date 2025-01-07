@@ -1,0 +1,17 @@
+services:
+    fuseki:
+        image: ${IMAGE_VERSION}
+        restart: "no"
+        profiles: ["test.fuseki"]
+        ports:
+        -   "${PORT}:3030"
+        container_name: ${CONTAINER_NAME}
+        volumes:
+        -   ${STORE_FOLDER}:/fuseki
+        -   source: ${STORE_FOLDER}
+            target: /fuseki
+            type: bind
+            bind:
+                create_host_path: true
+        environment:
+        -   ADMIN_PASSWORD=${TS_PASSWORD}

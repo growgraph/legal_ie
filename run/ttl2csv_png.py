@@ -40,7 +40,10 @@ def proc(ttl_fname, plot):
         df_reduced = df.loc[~mask_trivial & (~mask_o & ~mask_s)].copy()
 
         visualize_nx(
-            df_reduced, ".".join(ttl_fname.split(".")[:-1] + ["nx.png"]), scale=1.1
+            df_reduced,
+            ".".join(ttl_fname.split(".")[:-1] + ["nx.edges"]),
+            scale=1.2,
+            draw_edges=True,
         )
 
 

@@ -14,11 +14,19 @@ from datetime import datetime
 import json
 from multiprocessing.pool import ThreadPool
 from legal_ie.util import extract_struct, replace_namespaces
+from enum import StrEnum
 
 logger = logging.getLogger(__name__)
 
 
-def process_unit(rel_fp, text, onto_str, output_path, fresh=False):
+class OutcomeFlag(StrEnum):
+    SUCCESS = "success"
+    EXISTS = "exists"
+    FAILED = "failed"
+    FAILED_LEAVE = "failed_leave"
+
+
+def process_unit(rel_fp, text, _, onto_str, output_path, fresh=False) -> OutcomeFlag:
     llm = ChatOpenAI(model="gpt-4o-mini")
 
     output_path = output_path.expanduser()
@@ -41,8 +49,11 @@ def process_unit(rel_fp, text, onto_str, output_path, fresh=False):
     tmp = tmp_str.split("_")
     doc_id = tmp[0].replace(".", "--")
 
+    if not doc_id[0].isalpha():
+        doc_id = f"fca--{doc_id}"
+
     if fn_ttl.exists() and not fresh:
-        return False
+        return OutcomeFlag.EXISTS
     else:
         response_raw = render_response(onto_str, text=text, llm=llm)
 
@@ -59,12 +70,23 @@ def process_unit(rel_fp, text, onto_str, output_path, fresh=False):
             json.dump({"remarks": extracted_comments}, outfile, indent=4)
 
         g = rdflib.Graph()
-        _ = g.parse(data=extracted_ttl, format="turtle")
+        try:
+            _ = g.parse(data=extracted_ttl, format="turtle")
+        except Exception as e:
+            logger.error(f"{doc_id} failed")
+            logger.error(f"{e}")
+            return OutcomeFlag.FAILED
 
         current_ns = rdflib.Namespace("https://growgraph.dev/current#")
         specific_ns = rdflib.Namespace(f"https://growgraph.dev/fca/appeal/{doc_id}#")
+        try:
+            g = replace_namespaces(g, current_ns, specific_ns)
+        except Exception as e:
+            logger.error(f"Exception : {e}")
+            logger.error(f"doc {doc_id} failed")
+            return OutcomeFlag.FAILED_LEAVE
 
-        g = replace_namespaces(g, current_ns, specific_ns)
+        g.bind(doc_id, specific_ns)
 
         g.serialize(destination=fn_ttl)
 
@@ -74,18 +96,36 @@ def process_unit(rel_fp, text, onto_str, output_path, fresh=False):
         ).sort_values(["object", "subject", "predicate"])
 
         df.to_csv(fn_csv, index=False)
-    return True
+    return OutcomeFlag.SUCCESS
 
 
-def process_batch(batch, onto_str, output_path, fresh, to_kg=True):
+def process_batch(batch, onto_str, output_path, head, fresh, to_kg=True):
     ts = [(rfp, *process_file(fp), onto_str, output_path, fresh) for fp, rfp in batch]
+    template = "Chambre criminelle"
+    ts_submitted = [
+        (rfp, text, pages, onto_str, output_path, fresh)
+        for rfp, text, pages, onto_str, output_path, fresh in ts
+        if (pages and template in pages[0]) or (not pages)
+    ]
+    if head is not None:
+        ts_submitted = ts_submitted[:head]
+
     if to_kg:
-        if len(ts) > 1:
-            with ThreadPool(processes=4) as pool:
-                _ = pool.map(process_unit, ts)
-        else:
-            for item in ts:
-                process_unit(*item)
+        flags: list[OutcomeFlag]
+        ts_current = [x for x in ts_submitted]
+        while ts_current:
+            if len(ts) > 1:
+                with ThreadPool(processes=4) as pool:
+                    flags = pool.starmap(process_unit, ts_current)
+            else:
+                flags = [process_unit(*item) for item in ts_current]
+
+            ts_current = [
+                item
+                for item, flag in zip(ts_current, flags)
+                if flag == OutcomeFlag.FAILED
+            ]
+    return len(ts_submitted)
 
 
 @click.command()
@@ -109,16 +149,22 @@ def main(input_path, output_path, onto_path, env_path, head, batch_size, fresh):
 
     files = sorted(crawl_directories(input_path.expanduser()))
     files = [(fp, pathlib.Path(*fp.parts[nabs_parts:])) for fp in files]
-    if head is not None:
-        files = files[:head]
-
     batches = [
         files[i * batch_size : (i + 1) * batch_size]
         for i in range(int(len(files) / batch_size) + 1)
     ]
 
-    for batch in batches:
-        process_batch(batch, onto_str, output_path, fresh)
+    cnt = 0
+    for jb, batch in enumerate(batches):
+        cdate = str(batch[0][-1]).split("/")[0]
+        logger.info(f"processing batch {jb+1}/{len(batches)}; current date {cdate}")
+        current_count = process_batch(batch, onto_str, output_path, head, fresh)
+        if head is not None:
+            if cnt >= head:
+                break
+            head = head - current_count
+        cnt += current_count
+        logger.info(f"processed {cnt} docs; batch {jb + 1}")
 
 
 if __name__ == "__main__":

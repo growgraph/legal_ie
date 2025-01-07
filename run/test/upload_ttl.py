@@ -18,7 +18,7 @@ def upload_ttl_to_fuseki(file_path, fuseki_url, username, password):
         print(f"Response: {response.text}")
 
 
-ttl_file_path = "data/onto/criminal.v2.ttl"
+ttl_file_path = "data/onto/criminal.v3.ttl"
 fuseki_endpoint = "http://localhost:3032/legal"
 username = "admin"
 password = "abc123-qwe"

@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 def crawl_directories(input_path: pathlib.Path, suffixes=(".pdf", ".json")):
-    file_paths = []
+    file_paths: list[pathlib.Path] = []
 
     if not input_path.is_dir():
         print(f"The path {input_path} is not a valid directory.")
@@ -55,7 +55,7 @@ def process_file(fp_abs):
 def join_pages(pages: list[str]):
     full_text = []
     for pt in pages:
-        paragraph = []
+        paragraph: list[str] = []
         lines = pt.splitlines()
         for line in lines:
             if line.strip():
