@@ -161,6 +161,8 @@ def main(input_path, output_path, onto_path, env_path, head, batch_size, fresh):
         for i in range(int(len(files) / batch_size) + 1)
     ]
 
+    batches = [b for b in batches if b]
+
     cnt = 0
     for jb, batch in enumerate(batches):
         cdate = str(batch[0][-1]).split("/")[0]
