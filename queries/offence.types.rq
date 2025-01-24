@@ -1,0 +1,12 @@
+PREFIX fca: <http://growgraph.dev/fcaont#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?appealDecisionType (COUNT(DISTINCT ?case) AS ?decisionCount)
+WHERE {
+  ?appealDecision a ?appealDecisionType .
+  ?appealDecision rdfs:subClassOf* fca:AppealDecision .
+  FILTER (?appealDecisionType != fca:AppealDecision && ?appealDecisionType != rdfs:Class)
+  ?case fca:hasAppealDecision ?appealDecision .
+}
+GROUP BY ?appealDecisionType
+ORDER BY DESC(?decisionCount)

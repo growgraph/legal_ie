@@ -1,0 +1,27 @@
+PREFIX fca: <http://growgraph.dev/fcaont#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?AppealId ?AppealDecision ?PunishmentDuration ?FineAmount ?CurrencyCode
+WHERE {
+  ?case a fca:Case ;
+        fca:hasAppealId ?AppealId ;
+        fca:hasJudgment ?judgment .
+
+  OPTIONAL {
+    ?judgment fca:hasPunishment ?punishment .
+    ?punishment a fca:CustodialPunishment ;
+                fca:hasDuration ?PunishmentDuration .
+  }
+
+  OPTIONAL {
+    ?case fca:hasAppealDecision ?AppealDecision .
+  }
+
+  OPTIONAL {
+    ?judgment fca:hasPunishment ?monetaryPunishment .
+    ?monetaryPunishment a fca:MonetaryPunishment ;
+                        fca:monetaryAmount ?FineAmount ;
+                        fca:currencyCode ?CurrencyCode .  # Added to retrieve currency code
+  }
+}
+ORDER BY ?AppealId

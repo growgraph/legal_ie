@@ -1,0 +1,20 @@
+PREFIX fca: <http://growgraph.dev/fcaont#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?AppealId ?AppealDecision ?PunishmentDuration
+WHERE {
+  ?case a fca:Case ;
+        fca:hasAppealId ?AppealId ;
+        fca:hasJudgment ?judgment .
+
+  OPTIONAL {
+    ?judgment fca:hasPunishment ?punishment .
+    ?punishment a fca:CustodialPunishment ;
+                fca:hasDuration ?PunishmentDuration .
+  }
+
+  OPTIONAL {
+    ?case fca:hasAppealDecision ?AppealDecision .
+  }
+}
+ORDER BY ?AppealId

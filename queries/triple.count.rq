@@ -1,0 +1,22 @@
+SELECT ?namespace (COUNT(DISTINCT CONCAT(STR(?s), STR(?p), STR(?o))) AS ?uniqueTripleCount)
+WHERE {
+  ?s ?p ?o .
+  BIND(
+    IF(
+      STRSTARTS(STR(?s), "https://growgraph.dev/fca/appeal/fca--"),
+      STRBEFORE(STR(?s), "#"),
+      IF(
+        STRSTARTS(STR(?p), "https://growgraph.dev/fca/appeal/fca--"),
+        STRBEFORE(STR(?p), "#"),
+        IF(
+          STRSTARTS(STR(?o), "https://growgraph.dev/fca/appeal/fca--"),
+          STRBEFORE(STR(?o), "#"),
+          ""
+        )
+      )
+    ) AS ?namespace
+  )
+  FILTER(?namespace != "")
+}
+GROUP BY ?namespace
+ORDER BY DESC(?uniqueTripleCount)

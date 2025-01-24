@@ -1,3 +1,10 @@
+"""
+1. read pdfs from `input_path`
+2. process them using openai api (OPENAI_API_KEY loaded from .env found at `env_path`) using ontology found at `onto_path`
+3. store triple as `.ttl` in `output_path`
+
+"""
+
 import logging
 import sys
 

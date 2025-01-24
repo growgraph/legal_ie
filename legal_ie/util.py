@@ -69,7 +69,7 @@ def render_response(onto_str: str, text: str, llm):
         Respect the following:
 
          - for entities that represent instances (specific to the document) use the namespace `@prefix cu: <https://growgraph.dev/current#> .`
-         - make sure that resultant graph is connected (all the entities specific to the document should have a path leading to the root, case id, for example)
+         - make sure that resultant graph is connected with respect to `cu` namespace (all the entities specific to the document should have a path leading to the root, case id, for example)
          - while the input text is in French, make sure all generated literals are in English, except for the proper names
          - be as specific as possible, respect the granularity provided by the ontology <https://growgraph.dev/fcaont#>: 
             - map the age and social status of people involved

@@ -1,0 +1,17 @@
+PREFIX fca: <http://growgraph.dev/fcaont#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?CaseId ?AppealDecision ?OffenseType
+WHERE {
+  ?case a fca:Case ;
+        fca:hasAppealId ?CaseId ;
+        fca:hasAppealDecision ?AppealDecision .
+
+  OPTIONAL {
+    BIND(IRI(CONCAT(STR(?case), "Offense")) AS ?offense)
+    ?offense fca:hasOffenseType ?OffenseType .
+    ?OffenseType rdfs:subClassOf* fca:OffenseType .
+  }
+}
+ORDER BY ?CaseId
