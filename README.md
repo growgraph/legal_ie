@@ -14,9 +14,21 @@ This packages contains:
 wget https://github.com/mozilla/geckodriver/releases/download/v0.32.0/geckodriver-v0.32.0-linux64.tar.gz
  ``` 
 
-2. run it (default port is 4444)
+2. install `xvfb` and set parameters, do not run geckodriver as root user
 
-3. scrape
+```shell
+sudo apt install xvfb
+Xvfb :99 -screen 0 1024x768x24 &
+export DISPLAY=:99
+```
+
+3. run geckodriver (default port is 4444)
+
+```shell
+nohup geckodriver --port 4444 &
+```
+
+4. scrape
 
 ### setting up triple store (Fuseki)
 
