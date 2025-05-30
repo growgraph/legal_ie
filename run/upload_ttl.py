@@ -72,7 +72,7 @@ def process_batch(batch, dataset):
 @click.option("--input-path", type=click.Path(path_type=pathlib.Path), required=True)
 @click.option("--onto-path", type=click.Path(path_type=pathlib.Path), required=True)
 @click.option("--env-path", type=click.Path(path_type=pathlib.Path), required=True)
-@click.option("--dataset", type=click.STRING, default="fca2")
+@click.option("--dataset", type=click.STRING, default="test")
 @click.option("--head", type=click.INT, default=None)
 @click.option("--batch-size", type=click.INT, default=10)
 def main(input_path, onto_path, env_path, dataset, head, batch_size):

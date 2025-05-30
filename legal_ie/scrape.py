@@ -91,11 +91,14 @@ def fetch_total_pages(base_url, driver, fetch_timeout=10):
     return 0
 
 
-def download_pdfs(driver, decision_links, download_path):
+def download_pdfs(driver, decision_links, download_path, without_zonage=True):
     failed = []
+
+    pdf_kind = 0 if without_zonage else 1
+
     for link in tqdm(decision_links):
         doc_id = link.split("/")[-1].split("?")[0]
-        pdf_url = f"https://www.courdecassation.fr/decision/export/{doc_id}/1"
+        pdf_url = f"https://www.courdecassation.fr/decision/export/{doc_id}/{pdf_kind}"
         try:
             download_pdf(driver, pdf_url, download_path)
         except Exception as e:

@@ -259,6 +259,12 @@ fca:FirstInstance a fca:Court ;
     rdfs:label "First Instance Court"@en, "Tribunal de première instance"@fr ;
     rdfs:comment "Court that hears a case for the first time." .
 
+fca:AppealCourt a rdfs:Class ;
+    rdfs:subClassOf fca:Court ;
+    rdfs:label "Court of Appeal"@en, "Cour d'appel"@fr ;
+    rdfs:comment "A court that hears appeals from lower courts (tribunaux)." ;
+    owl:disjointWith fca:FirstInstance, fca:Cassation .
+
 fca:Cassation a fca:Court ;
     rdfs:label "Court of Cassation"@en, "Cour de cassation"@fr ;
     rdfs:comment "Supreme court of the French judicial system." ;
@@ -266,6 +272,31 @@ fca:Cassation a fca:Court ;
                        fca:CivilChamber,
                        fca:CommercialChamber,
                        fca:SocialChamber .
+
+
+fca:City a rdfs:Class ;
+    rdfs:subClassOf schema:Place ;
+    rdfs:label "City"@en, "Ville"@fr .
+
+fca:Region a rdfs:Class ;
+    rdfs:subClassOf schema:Place ;
+    rdfs:label "Region"@en, "Région"@fr .
+
+fca:Department a rdfs:Class ;
+    rdfs:subClassOf schema:Place ;
+    rdfs:label "Department"@en, "Département"@fr .
+
+fca:locatedIn a rdf:Property ;
+    rdfs:label "located in"@en, "situé à"@fr ;
+    rdfs:domain fca:Court ;
+    rdfs:range schema:Place ;
+    rdfs:comment "The city, department, or region where a court is located." .
+
+fca:hasJurisdictionOver a rdf:Property ;
+    rdfs:label "has jurisdiction over"@en, "a juridiction sur"@fr ;
+    rdfs:domain fca:Court ;
+    rdfs:range schema:Place ;
+    rdfs:comment "The geographical area (city, department, region) where a court has legal authority." .
 
 fca:challenges a rdf:Property ;
     rdfs:label "challenges" ;
