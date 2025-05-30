@@ -143,7 +143,7 @@ def init_ff_options(download_path):
     return firefox_options
 
 
-def process_date(date, data, base_url, download_path, geckodriver_path, head):
+def process_date(date, data, base_url, download_path, geckodriver_path, head, geckodriver_port=4444):
     date_str = date.date().isoformat()
     logger.info(f"Processing {date_str}")
     data["date_du"] = date_str
@@ -155,7 +155,7 @@ def process_date(date, data, base_url, download_path, geckodriver_path, head):
         download_subpath.mkdir(parents=True, exist_ok=True)
 
     ff_options = init_ff_options(download_subpath)
-    service = Service(geckodriver_path.as_posix())
+    service = Service(geckodriver_path.as_posix(), port=geckodriver_port)
     driver = webdriver.Firefox(service=service, options=ff_options)
     query_string = urlencode(data)
     full_url = f"{base_url}{query_string}"

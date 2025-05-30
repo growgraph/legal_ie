@@ -7,12 +7,16 @@ This packages contains:
 - sparql analysis scripts 
 
 
-###
-to download court decisions use geckodriver
+### Downloading court decisions use geckodriver
 
+1. Download gecko driver
 ```shell
 wget https://github.com/mozilla/geckodriver/releases/download/v0.32.0/geckodriver-v0.32.0-linux64.tar.gz
  ``` 
+
+2. run it (default port is 4444)
+
+3. scrape
 
 ### setting up triple store (Fuseki)
 
