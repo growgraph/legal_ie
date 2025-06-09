@@ -20,9 +20,9 @@ repos:
         -   -i
         -   "2"
 -   repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.7.1
+    rev: v0.11.13
     hooks:
-    -   id: ruff
+    -   id: ruff-check
         args: [--fix, --ignore, E722]
     -   id: ruff-format
 -   repo: local
@@ -34,7 +34,7 @@ repos:
         types: [python]
         args: ["-rn", "-sn", "--output-format=colorized", "--errors-only", "--jobs", "4", "--rcfile=.pylintrc"]
 -   repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.13.0
+    rev: v1.16.0
     hooks:
     -   id: mypy
         args: [--show-error-codes]
@@ -56,7 +56,7 @@ repos:
     -   id: pretty-format-toml
         args: [--autofix]
 -   repo: https://github.com/pappasam/toml-sort
-    rev: v0.23.1
+    rev: v0.24.2
     hooks:
     -   id: toml-sort
         args: [-ia]

@@ -143,7 +143,9 @@ def init_ff_options(download_path):
     return firefox_options
 
 
-def process_date(date, data, base_url, download_path, geckodriver_path, head, geckodriver_port=4444):
+def process_date(
+    date, data, base_url, download_path, geckodriver_path, head, geckodriver_port=4444
+):
     date_str = date.date().isoformat()
     logger.info(f"Processing {date_str}")
     data["date_du"] = date_str

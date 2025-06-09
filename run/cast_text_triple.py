@@ -166,7 +166,7 @@ def main(input_path, output_path, onto_path, env_path, head, batch_size, fresh):
     cnt = 0
     for jb, batch in enumerate(batches):
         cdate = str(batch[0][-1]).split("/")[0]
-        logger.info(f"processing batch {jb+1}/{len(batches)}; current date {cdate}")
+        logger.info(f"processing batch {jb + 1}/{len(batches)}; current date {cdate}")
         current_count = process_batch(batch, onto_str, output_path, head, fresh)
         if head is not None:
             if cnt >= head:
