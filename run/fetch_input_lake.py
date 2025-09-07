@@ -8,6 +8,7 @@ import pandas as pd
 import pathlib
 import click
 import logging.config
+import suthing
 
 from legal_ie.scrape import process_date
 
@@ -30,8 +31,7 @@ def main(start_date, end_date, download_path, geckodriver_path, head):
     data = {
         "search_api_fulltext": "",
         "judilibre_juridiction": "cc",
-        "judilibre_chambre%5B0%5D": "cr",
-        "op": "Rechercher%20sur%20judilibre",
+        "judilibre_chambre": "cr",
     }
 
     grid = pd.date_range(start_date, end_date, freq="1D")
@@ -41,7 +41,7 @@ def main(start_date, end_date, download_path, geckodriver_path, head):
         failed += fs
     logger.info(f"download complete, {len(failed)} failures")
     logger.info(f"failed ids: {failed}")
-
+    suthing.FileHandle.dump(failed, download_path / "failed.json")
 
 if __name__ == "__main__":
     logger_conf = "logging.conf"

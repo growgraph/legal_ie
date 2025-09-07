@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.12, <4"
 resolution-markers = [
     "python_full_version >= '3.12.4'",
@@ -326,6 +326,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/a9/95/a3dbbb5028f35eafb79008e7522a75244477d2838f38cbb722248dabc2a8/cycler-0.12.1.tar.gz", hash = "sha256:88bb128f02ba341da8ef447245a9e138fae777f6a23943da4540077d3601eb1c", size = 7615, upload-time = "2023-10-07T05:32:18.335Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e7/05/c19819d5e3d95294a6f5947fb9b9629efb316b96de511b418c53d245aae6/cycler-0.12.1-py3-none-any.whl", hash = "sha256:85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30", size = 8321, upload-time = "2023-10-07T05:32:16.783Z" },
+]
+
+[[package]]
+name = "dataclass-wizard"
+version = "0.34.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4a/b2/a8df2f4d5d2d49405e4cd794c0f331345800d5f656139fcb8f6a7b26ff0b/dataclass-wizard-0.34.0.tar.gz", hash = "sha256:f917db2220e395806a852f7c57e9011dd783b7fe3eee763bb56ae2d48968ab03", size = 279707, upload-time = "2024-12-30T22:06:29.747Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a6/cf/1dd49a7905388b1eb9594ca19783e6629b4c6f770e4bba01e78fe60ce61a/dataclass_wizard-0.34.0-py2.py3-none-any.whl", hash = "sha256:9c184edd3526c3523fec2de5b6d6cdfcdc97ed7b2c5ba8bc574284b793704f01", size = 169166, upload-time = "2024-12-30T22:06:26.279Z" },
 ]
 
 [[package]]
@@ -1129,6 +1141,7 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "rdflib" },
     { name = "selenium" },
+    { name = "suthing" },
     { name = "tqdm" },
 ]
 
@@ -1155,6 +1168,7 @@ requires-dist = [
     { name = "python-dotenv", specifier = ">=1.0.1,<2" },
     { name = "rdflib", specifier = ">=7.1.1,<8" },
     { name = "selenium", specifier = ">=4.27.1,<5" },
+    { name = "suthing", specifier = ">=0.4.1" },
     { name = "tqdm", specifier = ">=4.67.1,<5" },
 ]
 
@@ -2276,6 +2290,21 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/28/e3/55dcc2cfbc3ca9c29519eb6884dd1415ecb53b0e934862d3559ddcb7e20b/stack_data-0.6.3.tar.gz", hash = "sha256:836a778de4fec4dcd1dcd89ed8abff8a221f58308462e1c4aa2a3cf30148f0b9", size = 44707, upload-time = "2023-09-30T13:58:05.479Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f1/7b/ce1eafaf1a76852e2ec9b22edecf1daa58175c090266e9f6c64afcd81d91/stack_data-0.6.3-py3-none-any.whl", hash = "sha256:d5558e0c25a4cb0853cddad3d77da9891a08cb85dd9f9f91b9f8cd66e511e695", size = 24521, upload-time = "2023-09-30T13:58:03.53Z" },
+]
+
+[[package]]
+name = "suthing"
+version = "0.4.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "dataclass-wizard" },
+    { name = "pandas" },
+    { name = "python-dotenv" },
+    { name = "pyyaml" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e9/e4/881b2ce2617adc8d0db8629e613bc529bc7efc5bd3c452a317f3ad068c84/suthing-0.4.1.tar.gz", hash = "sha256:144685d9cf9e2c4ab9c022151c52627ab2193c003b4f78b2cbb7262fff68ec54", size = 80282, upload-time = "2025-05-02T08:21:44.393Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6f/42/68085b61f5f247f30b6b04548217a4a98e628c54e649d41d25fb0d5acef3/suthing-0.4.1-py3-none-any.whl", hash = "sha256:bfb3538a9ba380a967b5f555c7bfcde5c112dd7305cb90de818dd3e7ad684e6e", size = 12522, upload-time = "2025-05-02T08:21:43.153Z" },
 ]
 
 [[package]]
