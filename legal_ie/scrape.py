@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 def download_pdf(driver, pdf_url, download_path: pathlib.Path, sleep_time=3):
     driver.execute_script("window.open(arguments[0], '_blank');", pdf_url)
-    sleep(random.uniform(min([1, 0.5*sleep_time]), sleep_time))
+    sleep(random.uniform(min([1, 0.5 * sleep_time]), sleep_time))
     wait_for_pdf_download(driver, download_path, timeout=5)
 
 

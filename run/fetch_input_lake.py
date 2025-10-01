@@ -43,6 +43,7 @@ def main(start_date, end_date, download_path, geckodriver_path, head):
     logger.info(f"failed ids: {failed}")
     suthing.FileHandle.dump(failed, download_path / "failed.json")
 
+
 if __name__ == "__main__":
     logger_conf = "logging.conf"
     logging.config.fileConfig(logger_conf, disable_existing_loggers=False)
