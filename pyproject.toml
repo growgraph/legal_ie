@@ -24,10 +24,11 @@ dependencies = [
   "pandas>=2.2.3,<3",
   "pymupdf>=1.25.1,<2",
   "python-dotenv>=1.0.1,<2",
+  "rapidfuzz>=3.14.1",
   "rdflib>=7.1.1,<8",
   "selenium>=4.27.1,<5",
   "suthing>=0.4.1",
-  "tqdm>=4.67.1,<5"
+  "tqdm>=4.67.1,<5",
 ]
 description = ""
 name = "legal_ie"
