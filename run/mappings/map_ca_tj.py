@@ -77,7 +77,9 @@ def _load_stat(path: pathlib.Path) -> list[str]:
     required=True,
     help="Directory to write ca_map.csv, tj_map.csv, and bridge.csv",
 )
-@click.option("--threshold", default=60, show_default=True, help="Fuzzy match threshold (0-100)")
+@click.option(
+    "--threshold", default=60, show_default=True, help="Fuzzy match threshold (0-100)"
+)
 def main(
     corr_path: pathlib.Path,
     mentions_path: pathlib.Path,
@@ -111,8 +113,12 @@ def main(
         ca_mentions, ca_canonical, threshold=threshold, auto_detect_prefixes=True
     )
     ca_map_path = output_dir / "ca_map.csv"
-    ca_map.sort_values("similarity_score", ascending=True).to_csv(ca_map_path, index=False)
-    click.echo(f"  Matched {len(ca_map)}/{len(ca_mentions)} CA mentions -> {ca_map_path}")
+    ca_map.sort_values("similarity_score", ascending=True).to_csv(
+        ca_map_path, index=False
+    )
+    click.echo(
+        f"  Matched {len(ca_map)}/{len(ca_mentions)} CA mentions -> {ca_map_path}"
+    )
 
     unmatched_ca = set(ca_mentions) - set(ca_map["left_o"])
     if unmatched_ca:
@@ -124,7 +130,9 @@ def main(
         tj_stat, tj_canonical, threshold=threshold, auto_detect_prefixes=True
     )
     tj_map_path = output_dir / "tj_map.csv"
-    tj_map.sort_values("similarity_score", ascending=True).to_csv(tj_map_path, index=False)
+    tj_map.sort_values("similarity_score", ascending=True).to_csv(
+        tj_map_path, index=False
+    )
     click.echo(f"  Matched {len(tj_map)}/{len(tj_stat)} TJ labels -> {tj_map_path}")
 
     unmatched_tj = set(tj_stat) - set(tj_map["left_o"])
@@ -170,7 +178,14 @@ def main(
 
     # Keep the useful columns
     bridge = bridge[
-        ["ca_mention", "ca_canonical", "ca_score", "tj_canonical", "tj_stat", "tj_score"]
+        [
+            "ca_mention",
+            "ca_canonical",
+            "ca_score",
+            "tj_canonical",
+            "tj_stat",
+            "tj_score",
+        ]
     ].sort_values(["ca_mention", "tj_stat"])
 
     bridge_path = output_dir / "bridge.csv"
