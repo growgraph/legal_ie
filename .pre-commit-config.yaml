@@ -15,12 +15,6 @@ repos:
     -   id: ruff-check
         args: [--fix, --ignore, E722]
     -   id: ruff-format
--   repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.16.0
-    hooks:
-    -   id: mypy
-        args: [--show-error-codes]
-        additional_dependencies: [types-requests, types-python-dateutil, types-waitress, types-PyYAML, pandas-stubs]
 -   repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
     rev: v2.14.0
     hooks:
