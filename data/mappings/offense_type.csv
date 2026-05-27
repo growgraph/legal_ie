@@ -1,0 +1,30 @@
+fcaont,stat
+Assault;6. Violences sexuelles
+Assault;7. Violences par conjoint ou concubin
+Assault;8. Outrage, rébellion et violences sur personnes dépositaires de l'autorité publique
+Burglary;2. Vols aggravés
+CyberCrime;
+Disorderly_Conduct;8. Outrage, rébellion et violences sur personnes dépositaires de l'autorité publique
+DrugOffense;1. Conduite avec alcool ou stupéfiants
+DrugOffense;1.b Conduite sous stupéfiants
+DrugOffense;1.c Conduite en état d'ivresse ET sous stupéfiants
+DrugOffense;5. Infractions à la législation sur les stupéfiants
+Embezzlement;
+Fraud;
+Homicide;
+MoneyLaundering;
+OffenseType;
+PropertyOffense;2. Vols aggravés
+PropertyOffense;3. Vols simples
+PublicOrderCrime;1. Conduite avec alcool ou stupéfiants
+PublicOrderCrime;1.a Conduite en état d'ivresse
+PublicOrderCrime;4. Infractions à la police des étrangers
+PublicOrderCrime;8. Outrage, rébellion et violences sur personnes dépositaires de l'autorité publique
+Robbery;2. Vols aggravés
+Theft;2. Vols aggravés
+Theft;3. Vols simples
+Vandalism;
+ViolentOffense;6. Violences sexuelles
+ViolentOffense;7. Violences par conjoint ou concubin
+ViolentOffense;8. Outrage, rébellion et violences sur personnes dépositaires de l'autorité publique
+WhiteCollarOffense;

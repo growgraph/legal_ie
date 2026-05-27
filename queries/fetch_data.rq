@@ -1,0 +1,56 @@
+PREFIX fca: <http://growgraph.dev/fcaont#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?g ?Age ?FineAmount ?CurrencyCode ?OffenseType ?PunishmentDuration ?AppealDecision
+WHERE {
+  GRAPH ?g {
+    BIND(STR(?g) AS ?AppealId)
+
+    ?case a fca:Case .
+
+    # 2. FLAT AGES
+    OPTIONAL {
+      ?person ?ageProp ?rawAge .
+      VALUES ?ageProp { fca:Age fca:hasAge fca:age }
+      BIND(xsd:integer(?rawAge) AS ?Age)
+    }
+
+    # 3. FLAT OFFENSES (Fixed Variable Conflict)
+    OPTIONAL {
+      # Try to find the offense node via direct link or the constructed IRI
+      { ?case fca:hasOffense ?offense }
+      UNION
+      { BIND(IRI(CONCAT(STR(?case), "Offense")) AS ?offense) }
+
+      ?offense fca:hasOffenseType ?OTypeURI .
+      # Just grab the name (Theft, etc.) without checking the hierarchy
+      BIND(REPLACE(STR(?OTypeURI), "^.*[#|/]", "") AS ?OffenseType)
+    }
+
+    # 4. FLAT FINES
+    OPTIONAL {
+      # Match punishments via Judgment OR directly from the Case
+      { ?case fca:hasJudgment/fca:hasPunishment ?p . }
+      UNION
+      { ?case fca:hasPunishment ?p . }
+
+      # Extract Fine Amount (if present on the punishment node)
+      OPTIONAL {
+        ?p fca:monetaryAmount ?FineAmount .
+        OPTIONAL { ?p fca:currencyCode ?CurrencyCode . }
+      }
+
+      # Extract Duration (if present on the punishment node)
+      OPTIONAL {
+        ?p fca:hasDuration ?PunishmentDuration .
+      }
+    }
+
+    # 6. DECISION
+    OPTIONAL {
+      ?case fca:hasAppealDecision ?AppealDecision .
+    }
+  }
+}
+ORDER BY ?AppealId

@@ -745,3 +745,123 @@ fca:hasChamberType a owl:ObjectProperty ;
     rdfs:range fca:ChamberType ;
     rdfs:label "has Chamber Type"@en, "a pour type de chambre"@fr ;
     rdfs:comment "Property linking a court to its chamber type(s)." .
+
+
+# Property to link appeals to the court that issued the challenged decision
+fca:challengesDecisionFrom a rdf:Property ;
+    rdfs:label "challenges decision from"@en, "conteste la décision de"@fr ;
+    rdfs:domain fca:Appeal ;
+    rdfs:range fca:AppealCourt ;
+    rdfs:comment "Indicates the cour d'appel that issued the decision being challenged. The appeal itself is submitted to Cassation via fca:appealsTo." .
+
+# Define the 37 French Courts of Appeal as individuals
+fca:CourAppelLyon a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Lyon"@fr, "Lyon Court of Appeal"@en .
+
+fca:CourAppelAmiens a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel d'Amiens"@fr, "Amiens Court of Appeal"@en .
+
+fca:CourAppelRiom a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Riom"@fr, "Riom Court of Appeal"@en .
+
+fca:CourAppelAixEnProvence a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel d'Aix-en-Provence"@fr, "Aix-en-Provence Court of Appeal"@en .
+
+fca:CourAppelGrenoble a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Grenoble"@fr, "Grenoble Court of Appeal"@en .
+
+fca:CourAppelNimes a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Nîmes"@fr, "Nîmes Court of Appeal"@en .
+
+fca:CourAppelReims a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Reims"@fr, "Reims Court of Appeal"@en .
+
+fca:CourAppelToulouse a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Toulouse"@fr, "Toulouse Court of Appeal"@en .
+
+fca:CourAppelMontpellier a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Montpellier"@fr, "Montpellier Court of Appeal"@en .
+
+fca:CourAppelCaen a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Caen"@fr, "Caen Court of Appeal"@en .
+
+fca:CourAppelBordeaux a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Bordeaux"@fr, "Bordeaux Court of Appeal"@en .
+
+fca:CourAppelPoitiers a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Poitiers"@fr, "Poitiers Court of Appeal"@en .
+
+fca:CourAppelBourges a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Bourges"@fr, "Bourges Court of Appeal"@en .
+
+fca:CourAppelLimoges a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Limoges"@fr, "Limoges Court of Appeal"@en .
+
+fca:CourAppelDijon a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Dijon"@fr, "Dijon Court of Appeal"@en .
+
+fca:CourAppelRennes a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Rennes"@fr, "Rennes Court of Appeal"@en .
+
+fca:CourAppelBesancon a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Besançon"@fr, "Besançon Court of Appeal"@en .
+
+fca:CourAppelRouen a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Rouen"@fr, "Rouen Court of Appeal"@en .
+
+fca:CourAppelVersailles a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Versailles"@fr, "Versailles Court of Appeal"@en .
+
+fca:CourAppelBastia a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Bastia"@fr, "Bastia Court of Appeal"@en .
+
+fca:CourAppelAgen a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel d'Agen"@fr, "Agen Court of Appeal"@en .
+
+fca:CourAppelOrleans a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel d'Orléans"@fr, "Orléans Court of Appeal"@en .
+
+fca:CourAppelPau a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Pau"@fr, "Pau Court of Appeal"@en .
+
+fca:CourAppelAngers a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel d'Angers"@fr, "Angers Court of Appeal"@en .
+
+fca:CourAppelNancy a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Nancy"@fr, "Nancy Court of Appeal"@en .
+
+fca:CourAppelMetz a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Metz"@fr, "Metz Court of Appeal"@en .
+
+fca:CourAppelDouai a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Douai"@fr, "Douai Court of Appeal"@en .
+
+fca:CourAppelColmar a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Colmar"@fr, "Colmar Court of Appeal"@en .
+
+fca:CourAppelChambery a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Chambéry"@fr, "Chambéry Court of Appeal"@en .
+
+fca:CourAppelParis a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Paris"@fr, "Paris Court of Appeal"@en .
+
+fca:CourAppelBasseTerre a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Basse-Terre"@fr, "Basse-Terre Court of Appeal"@en .
+
+fca:CourAppelFortDeFrance a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Fort-de-France"@fr, "Fort-de-France Court of Appeal"@en .
+
+fca:CourAppelCayenne a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Cayenne"@fr, "Cayenne Court of Appeal"@en .
+
+fca:CourAppelSaintDenis a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Saint-Denis-de-La Réunion"@fr, "Saint-Denis-de-La Réunion Court of Appeal"@en .
+
+fca:TribunalSuperieurAppelSaintPierre a fca:AppealCourt ;
+    rdfs:label "Tribunal Supérieur d'Appel de Saint-Pierre-et-Miquelon"@fr, "Superior Court of Appeal of Saint-Pierre-et-Miquelon"@en .
+
+fca:CourAppelNoumea a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Nouméa"@fr, "Nouméa Court of Appeal"@en .
+
+fca:CourAppelPapeete a fca:AppealCourt ;
+    rdfs:label "Cour d'Appel de Papeete"@fr, "Papeete Court of Appeal"@en .
